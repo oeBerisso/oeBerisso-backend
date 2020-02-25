@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}Estudiantes{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">   
+		{% include 'student/filter.html' with context %}
+		<script type="text/javascript" src="{{url_for('static', filename='js/student.js')}}"></script>
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Estudiantes
+			</h1>
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>Documento</th>
+						<th>Apellido, Nombre</th>
+						<th>Nivel</th>
+						<th>Escuela</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				{% for student in students %}
+				<tbody>
+					<tr>
+						<td data-label="DNI">{{student.number}}</td>
+						<td data-label="Apellido, Nombre">{{student.last_name}}, {{student.first_name}}</td>
+						<td data-label="Nivel">{{student.level_id | translate_level}}</td>
+						<td data-label="Escuela">{{student.school_id | translate_school}}</td>
+						<td data-label="Opciones">
+							{% if has_permission(user_permissions, ['student_show']) %}
+								<button id='show{{student.id}}' class="ui icon button" data-tooltip="Ver Estudiante" data-position="top center">
+									<i class="user icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['student_update']) %}
+								<button class="ui icon primary button" data-tooltip="Modificar Estudiante" data-position="top center" onclick="window.location.href = '/estudiante/{{student.id}}/perfil'">
+									<i class="pencil alternate icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['student_destroy']) %}
+								<button id='delete{{student.id}}' class="ui icon negative button" data-tooltip="Borrar Estudiante" data-position="top center">
+									<i class="window close icon"></i>
+								</button>
+							{% endif %}
+						</td>
+						{% include 'student/modals/delete-modal.html' with context %}
+						{% include 'student/modals/profile-modal.html' with context %}
+                        <script>prepareModal({{student.id}}) </script>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="pagination">
+				{{ pagination.links }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

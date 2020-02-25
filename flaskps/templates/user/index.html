@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">   
+		{% include 'user/filter.html' with context %}
+		<script type="text/javascript" src="{{url_for('static', filename='js/user.js')}}"></script>
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Usuarios
+			</h1>
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>Usuario</th>
+						<th>Apellido, Nombre</th>
+						<th>Email</th>
+						<th>Activo</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				{% for user in users %}
+				<tbody>
+					<tr>
+						<td data-label="Usuario">{{user.username}}</td>
+						<td data-label="Apellido, Nombre">{{user.first_name}}, {{user.last_name}}</td>
+						<td data-label="Email">{{user.email}}</td>
+						<td data-label="Activo">{{user.active | translate_bool}}</td>
+						<td data-label="Opciones">
+							{% if has_permission(user_permissions, ['user_update']) %}
+								{% if user.active %}
+									<button id='active{{user.id}}' class="ui negative icon button" data-tooltip="Bloquear" data-position="top center">
+										<i class="user times icon"></i>
+									</button>
+								{% else %}
+									<button id='active{{user.id}}' class="ui icon positive button" data-tooltip="Activar" data-position="top center">
+										<i class="user plus icon"></i>
+									</button>
+								{% endif %}
+								<button id='edit{{user.id}}' class="ui icon primary button" data-tooltip="Modificar roles" data-position="top center">
+									<i class="pencil alternate icon"></i>
+								</button>
+							{% endif %}
+						</td>
+						{% include 'user/modals/roles.html' with context %}
+						{% include 'user/modals/active.html' with context %}
+						<script>prepareModal({{user.id}}, {{user.active}}) </script>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="pagination">
+				{{ pagination.links }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

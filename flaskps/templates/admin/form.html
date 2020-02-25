@@ -1,0 +1,40 @@
+<h3>Editar Configuraciones</h3> 
+<div class="ui form">
+    <form action="admin/update" class="ui form" method="POST">
+        <div class="two fields">
+            <div class="field">
+                <label>{{configs.title.title}}</label>
+                <div class="field">
+                    <input required name='{{ configs.title.field }}' type="text" value='{{configs.title.value}}' />
+                </div>
+            </div>
+            <div class="field">
+                <label>{{configs.elementsCount.title}}</label>
+                <div class="field">
+                    <input required name='{{ configs.elementsCount.field }}' type="number" value='{{configs.elementsCount.value}}' />
+                </div>
+            </div>
+        </div>
+        <div class="ui segment">
+            <div class="ui toggle checkbox">
+                <input type="checkbox" name="{{configs.maintenance.field}}" {{configs.maintenance.value | translate_checked}}>
+                <label><b>{{configs.maintenance.title}}</b>, esto deshabilitara el sitio para los usuarios</label>
+            </div>
+        </div>
+        <div class="two fields">
+            <div class="field">
+                <label>{{configs.email.title}}</label>
+                <div class="field">
+                    <input required name="{{configs.email.field}}" type="email" value="{{configs.email.value}}" />
+                </div>
+            </div>
+            <div class="field">
+                <label>{{configs.description.title}}</label>
+                <div class="field">
+                    <input required name='{{ configs.description.field }}' type="text" value='{{configs.description.value}}' />                
+                </div>
+            </div>
+        </div>
+        <button class="ui primary button fluid" type='submit'>Guardar</button>
+    </form>
+</div>

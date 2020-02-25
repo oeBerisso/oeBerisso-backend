@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block title %}Instrumentos{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %} 
+	<div class="ui segment">   
+
+        <h1 class="ui center aligned header">Modificar Instrumentos</h1>
+        <form class="ui form" action="/instrumento/{{instrument.id}}/modificar" method="POST" enctype="multipart/form-data">
+            <div class="field">
+               <label>Datos </label>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="name" placeholder="Nombre" value="{{instrument.name}}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Tipo de instrumento</label>
+                        <select class="ui fluid dropdown" name='type' required>    
+                            <option value="" disable>Tipo de instrumento</option>
+                            {% for key in instrument_types %}
+                                {% if key.id == instrument.type_id %}
+                                    <option value="{{key.id}}" selected>{{key.name}}</option>
+                                {% else %}
+                                    <option value="{{key.id}}">{{key.name}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="two fields">
+                        <div class="field">
+                            <label>Foto</label>
+                            <input type="file" name="photo" placeholder="Foto"/>
+                        </div>
+                        <div class="field" data-tooltip="Texto alternativo que describe a la imagen en caso de que la misma no se pueda cargar" data-position="bottom center">
+                            <label>Texto alternativo</label>
+                            <input type="text" name="alt" placeholder="Texto alternativo" value="{{instrument.alt}}" required />
+                        </div>
+                    </div>               
+            </div>
+            <button class="fluid ui primary button" type="submit">Modificar</button>
+        </form>
+	</div>
+{% endblock %}

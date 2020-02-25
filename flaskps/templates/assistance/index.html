@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="ui segment">   
+        <div class="ui container">
+            {% if school_year %}
+            <h1 class="ui center aligned header">
+                <h2>Ciclo Lectivo Semestre {{school_year.semester}}</h2>
+                <h2>{{school_year.start_date.strftime('%Y-%m-%d')}} al {{school_year.ending_date.strftime('%Y-%m-%d')}}</h2>
+            </h1>
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+						<th>Titulo</th>
+						<th>Titulo corto</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for workshop in workshops %}
+                        <tr>
+                            <td data-label="Titulo">{{workshop.name}}</td>
+                            <td data-label="Titulo corto">{{workshop.short_name}}</td>
+                            <td data-label="Opciones">
+                            {% if has_permission(user_permissions, ['assistace_update']) %}
+                                <a href='asistencia/{{school_year.id}}/{{workshop.id}}/fecha' data-tooltip="Pasar Lista">
+                                	<i class="add link bordered inverted black icon"></i>
+                                </a>
+							{% endif %}	
+                            </td>
+                        </tr>
+					{% endfor %}
+				</tbody>
+            </table>
+            {% else %}
+            <div class="iu message">
+                <div class="ui center aligned header">No estamos en fechas de un ciclo lectivo</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+<div class="ui container"> 
+    <h1 class="ui center aligned header">
+        Filtros
+    </h1>
+    <form action="instrumentos" class="ui form" method="GET">
+        <div class="ui form">
+            <div class="fields five fields">
+                <div class="field">
+                    <label>Nombre</label>
+                    <input type="text" placeholder="Nombre" name='name' value="{{name}}">
+                </div>
+                <div class="field">
+                    <label>Tipo de instrumento</label>
+                    <select class="ui fluid dropdown" name='type_id'>
+                        <option value="" disable>Tipo de instrumento</option>
+                        {% for key in instrument_types %}
+                            {% if key.id == type_id | int%}
+                                <option selected value="{{key.id}}">{{key.name}}</option>
+                            {%else%}
+                                <option value="{{key.id}}">{{key.name}}</option>
+                            {%endif%}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <br>
+                    <button class="ui primary icon button" type="submit" data-tooltip="Filtrar Instrumentos" data-position="bottom center">
+                        <i class="search icon"></i>
+                    </button>
+                    <button class="ui secondary icon button" type="button" onclick="window.location.href = '/instrumentos'" data-tooltip="Limpiar filtros" data-position="bottom center">
+                        <i class="times icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    
+<div class="ui divider"></div>

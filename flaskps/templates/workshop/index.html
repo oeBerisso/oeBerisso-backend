@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Talleres
+			</h1>
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>Titulo</th>
+						<th>Titulo corto</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody>
+                    {% for workshop in workshops %}
+                        <tr>
+                            <td data-label="Titulo">{{workshop.name}}</td>
+                            <td data-label="Titulo corto">{{workshop.short_name}}</td>
+                            <td data-label="Opciones">
+								{% if has_permission(user_permissions, ['workshop_update']) %}
+									{% if asigned_to_schoolar_year(workshop.id) %}
+										<a href='/taller/{{workshop.id}}/asignar_docentes' data-tooltip="Asignar docentes">
+											<i class="add link bordered inverted blue icon"></i>
+										</a>
+										<a href="/taller/{{workshop.id}}/estudiantes" data-tooltip="Asignar estudiantes">
+											<i class="add link bordered inverted green icon"></i>
+										</a>
+									{% else %}
+										Este taller no esta asociado a ningún <a href="{{url_for('school_year_list')}}"> ciclo lectivo.</a>
+									{% endif %}
+								{% endif %}	
+                            </td>
+                        </tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}
+

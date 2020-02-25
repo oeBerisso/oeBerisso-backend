@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+
+    <div class="ui segment">
+        <h1 class="ui center aligned header">
+            Asignar Horarios
+        </h1>
+        <div class="ui segment">
+            <form action="#" class="ui form" method="POST">
+                <div class="two fields">
+                    <div class="field">
+                        <label>Taller</label>
+                        <select class="ui fluid search dropdown" name="workshop">
+                            {% for workshop in workshops_assigned %}
+                                <option name="{{workshop.id}}" value="{{workshop.id}}">{{workshop.name}} |  {{workshop.start_date.strftime('%Y-%m-%d') }} - {{workshop.ending_date.strftime('%Y-%m-%d')}} ( Semestre: {{workshop.semester}} )</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Nucleos</label>
+                        <select class="ui fluid search dropdown" name="core">
+                            {% for core in cores %}
+                                <option name="{{core.id}}" value="{{core.id}}">{{core.name}} ( {{core.address}} )</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="fields">
+                    <div class="ten wide field">
+                        <label>Dias</label>
+                        <select class="ui fluid search dropdown" name="day">
+                            {% for day in days %}
+                                <option name="{{day.id}}" value="{{day.id}}">{{day.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="three wide field">
+                        <label>Hora de inicio</label>
+                        <div class="field">
+                            <input type="time" name="start_time" />
+                        </div>
+                    </div>
+                    <div class="three wide field">
+                        <label>Hora de fin</label>
+                        <div class="field">
+                            <input type="time" name="finish_time" />
+                        </div>
+                    </div>
+                </div>
+                <div class="ui divider"></div>
+                <button class="ui primary button fluid" type='submit'>Guardar</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

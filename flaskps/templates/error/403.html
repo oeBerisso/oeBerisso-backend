@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h1>Oh no!</h1>
+  <p>ERROR 403, No tienes permiso de acceder a esta pagina
+  </p>
+  <!-- Add the stylesheet to the head -->
+  <link rel="stylesheet" type="text/css" href="https://gitcdn.xyz/repo/pi0/clippyjs/master/assets/clippy.css">
+
+  <script src="https://unpkg.com/clippyjs@latest"></script>
+
+  <script type="text/javascript">
+
+  clippy.load('Clippy', function(agent){
+    // Do anything with the loaded agent
+    agent.show();
+    agent.moveTo(500,300);
+    agent.speak("Parece que quieres acceder a una pagina sin permisos,\n\n\n ¿Necesitas ayuda?")
+    setInterval(() => {
+        agent.speak('Estas ahi?')
+        agent.play('GetAttention')
+    }, 20000)
+  });
+</script>
+{% endblock %}

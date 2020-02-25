@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}Profesores{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">   
+		{% include 'teacher/filter.html' with context %}
+		<script type="text/javascript" src="{{url_for('static', filename='js/teacher.js')}}"></script>
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Profesores
+			</h1>
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>Documento</th>
+						<th>Apellido, Nombre</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				{% for teacher in teachers %}
+				<tbody>
+					<tr>
+						<td data-label="DNI">{{teacher.number}}</td>
+						<td data-label="Apellido, Nombre">{{teacher.last_name}}, {{teacher.first_name}}</td>
+						<td data-label="Opciones">
+							{% if has_permission(user_permissions, ['teacher_show']) %}
+								<button id='show{{teacher.id}}' class="ui icon button" data-tooltip="Ver Profesor" data-position="top center">
+									<i class="user icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['teacher_update']) %}
+								<button class="ui icon primary button" data-tooltip="Modificar Profesor" data-position="top center" onclick="window.location.href = '/profesor/{{teacher.id}}/perfil'">
+									<i class="pencil alternate icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['teacher_destroy']) %}
+								<button id='delete{{teacher.id}}' class="ui icon negative button" data-tooltip="Borrar Profesor" data-position="top center">
+									<i class="window close icon"></i>
+								</button>
+							{% endif %}
+						</td>
+						{% include 'teacher/modals/delete-modal.html' with context %}
+						{% include 'teacher/modals/profile-modal.html' with context %}
+                        <script>prepareModal({{teacher.id}}) </script>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="pagination">
+				{{ pagination.links }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

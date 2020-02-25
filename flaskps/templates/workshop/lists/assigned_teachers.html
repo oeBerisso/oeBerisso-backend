@@ -1,0 +1,24 @@
+<table class="ui celled table">
+    <thead>
+        <tr>
+            <th>Nombre y apellido</th>
+            <th>Taller</th>
+            <th>Ciclo lectivo</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in assigned_teachers %}
+            <tr>
+                <td data-label="Nombre y apellido">{{teacher.name}}</td>
+                <td data-label="Taller">{{workshop_data.name}}</td>
+                <td data-label="Ciclo lectivo">{{workshop.short_name}}</td>
+                <td data-label="Opciones">
+                    <a href='/taller/{{workshop.id}}/{{teacher_id}}/quitar' data-tooltip="Asignar docentes">
+                        <i class="remove link bordered inverted red icon"></i>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

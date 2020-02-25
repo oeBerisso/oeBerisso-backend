@@ -1,0 +1,53 @@
+body{
+    min-height: 100vh;
+    position: relative;
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination li {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    left: -30px;
+    border: 1px solid rgb(83, 120, 187);   
+}
+  
+.pagination li.active {
+    background-color: #4CAF50;
+    color: white;
+}
+  
+.pagination a{
+    color: black;
+    float: left;
+    display: inline-block;     
+    position: relative;    
+    z-index: 1;     
+    padding: 0.75em;     
+    margin: -0.75em; 
+}
+
+.footer-buttons{
+    text-align: right;
+    vertical-align: middle;
+}
+
+.footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.page-container{
+    min-height: 80% !important; /* will cover the 100% of viewport */
+    overflow: hidden !important;
+    display: block !important;
+    position: relative !important;
+    padding-bottom: 100px !important; /* height of your footer */
+}

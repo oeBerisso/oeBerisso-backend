@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+{% block title %}Instrumentos{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">   
+		{% include 'instrument/filter.html' with context %}
+		<script type="text/javascript" src="{{url_for('static', filename='js/instrument.js')}}"></script>
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Instrumentos
+			</h1>
+			<table class="ui celled table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Tipo de Instrumento</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				{% for instrument in instruments %}
+				<tbody>
+					<tr>
+						<td data-label="Nombre">{{instrument.name}}</td>
+						<td data-label="Tipo">{{instrument.type_id | translate_instrument_type}}</td>
+						<td data-label="Opciones">
+							{% if has_permission(user_permissions, ['instrument_show']) %}
+								<button id='show{{instrument.id}}' class="ui icon button" data-tooltip="Ver Instrumento" data-position="top center">
+									<i class="user icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['instrument_update']) %}
+								<button class="ui icon primary button" data-tooltip="Modificar Instrumento" data-position="top center" onclick="window.location.href = '/instrumento/{{instrument.id}}/perfil'">
+									<i class="pencil alternate icon"></i>
+								</button>
+							{% endif %}
+							{% if has_permission(user_permissions, ['instrument_destroy']) %}
+								<button id='delete{{instrument.id}}' class="ui icon negative button" data-tooltip="Borrar Instrumento" data-position="top center">
+									<i class="window close icon"></i>
+								</button>
+							{% endif %}
+						</td>
+						{% include 'instrument/modals/delete-modal.html' with context %}
+						{% include 'instrument/modals/profile-modal.html' with context %}
+                        <script>prepareModal({{instrument.id}}) </script>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="pagination">
+				{{ pagination.links }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

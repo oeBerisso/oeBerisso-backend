@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <h1 style="text-align: center;">Ciclo Lectivo</h1>
+    <div class="ui form">
+        <form action="{{url_for('school_year_create')}}" class="ui form" method="POST">
+            <div class="three fields">
+                <div class="field">
+                    <label>Semestre</label>
+                    <div class="field">
+                        <select name="semester" class="ui fluid dropdown">
+                            <option value="1">Semestre I</option>
+                            <option value="2">Semestre II</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Fecha de inicio</label>
+                    <div class="field">
+                        <input name="start_date" type="date">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Fecha de inicio</label>
+                    <div class="field">
+                        <input name="ending_date" type="date">
+                    </div>
+                </div>
+            </div>
+            <button class="ui primary button fluid" type='submit'>Guardar</button>
+        </form>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+  <h1 style="text-align: center;">Perfil</h1>
+  <div class="ui two column grid divided">
+    <div class="column">
+      {% include 'user/profile-form.html' with context %}
+    </div>
+    <div class="column">
+      {% include 'user/profile-pass.html' with context %}
+    </div>
+
+{% endblock %}
+

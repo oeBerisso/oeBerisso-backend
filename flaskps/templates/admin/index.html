@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+  <h1 style="text-align: center;">Administracion</h1>
+  <div class="ui two column grid divided doubling">
+    <div class="column">
+      <h3>Configuraciones de la pagina:</h3> 
+      {% for key in configs %}
+        <div class="ui list">
+          <div class="item">
+            <div class="header"> {{configs[key].title}} </div>
+            {% if key == 'maintenance' %}
+              <div class="description"> {{configs[key].value | translate_bool}} </div>
+            {% else %} 
+              <div class="description"> {{configs[key].value}} </div>
+            {% endif %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="column">
+      {% include 'admin/form.html' with context %}
+    </div>
+
+  </div>
+
+
+{% endblock %}
+

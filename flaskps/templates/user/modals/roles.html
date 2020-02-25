@@ -1,0 +1,46 @@
+<div id='roles-modal{{user.id}}' class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Modificar roles de {{user.username}}
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui icon header">
+                Roles seleccionados
+            </div>
+            <div class="field">
+                <form action="/usuarios/{{user.id}}/modicar_roles" class="ui form" method="POST">
+                    <div class="field">
+                        {% for rol in user.roles %}
+                            <div class="ui checkbox">
+                                {% if rol.selected %}
+                                <div class="ui slider checkbox">
+                                    <input type="checkbox" name="{{rol.id}}" checked>
+                                    <label>{{rol.name}}</label>
+                                </div>
+                                {% else %}
+                                <div class="ui slider checkbox">
+                                        <input type="checkbox" name="{{rol.id}}">
+                                        <label>{{rol.name}}</label>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            </br>
+                        {% endfor %}
+                    </div>
+                    <br>
+                    <div class="field">
+                        <button class="ui primary button" type="submit" data-tooltip="Asignar roles" data-position="bottom center">
+                            Asignar roles
+                        </button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancelar
+        </div>
+    </div>
+</div>

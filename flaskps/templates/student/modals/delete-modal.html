@@ -1,0 +1,27 @@
+<div id='delete-modal{{student.id}}' class="ui basic modal">
+    <div class="ui center aligned icon header">
+    
+        <i class="user times icon"></i>
+        Eliminar Estudiante
+    </div>
+    <div class="ui content">
+        <center>
+            <h3>
+                Esta seguro que desea eliminar a {{student.first_name}} {{student.last_name}}? 
+            </h3>
+            <p>
+                Si lo acepta, este estudiante se eliminara por completo del sistema
+            </p>
+        </center>
+    </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            No
+        </div>
+        <div class="ui green ok inverted button">
+            <i class="checkmark icon"></i>
+            si
+        </div>
+    </div>
+</div>

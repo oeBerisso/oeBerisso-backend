@@ -1,0 +1,52 @@
+<div class="ui container"> 
+    <h1 class="ui center aligned header">
+        Filtros
+    </h1>
+    <form action="usuarios" class="ui form" method="GET">
+        <div class="ui form">
+            <div class="fields five fields">
+                <div class="field">
+                    <label>Nombre de usuario</label>
+                    <input type="text" placeholder="Nombre de usuario" value="{{username}}" name='username'>
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input type="text" placeholder="Email" name='email' value="{{email}}">
+                </div>
+                <div class="field">
+                    <label>Apellido o nombre</label>
+                    <input type="text" placeholder="Apellido o nombre" name='name' value="{{name}}">
+                </div>
+                <div class="field">
+                    <label>Activo</label>
+                    <select class="ui fluid dropdown" name='active'>
+                        {% if active == "1" %}
+                            <option value="" disable >Todos</option>
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Desactivo</option>
+                        {% elif active == "0" %}
+                            <option value="" disabled>Todos</option>
+                            <option value="1" >Activo</option>
+                            <option value="0" selected>Desactivo</option>
+                        {% else %}
+                            <option value="" disabled selected>Todos</option>
+                            <option value="1" >Activo</option>
+                            <option value="0" >Desactivo</option>
+                        {% endif %}
+                    </select>
+                </div>
+                <div class="field">
+                    <br>
+                    <button class="ui primary icon button" type="submit" data-tooltip="Filtrar usuarios" data-position="bottom center">
+                        <i class="search icon"></i>
+                    </button>
+                    <button class="ui secondary icon button" type="button" onclick="window.location.href = '/usuarios'" data-tooltip="Limpiar filtros" data-position="bottom center">
+                        <i class="times icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    
+<div class="ui divider"></div>

@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<div class="ui segment">   
+    <div class="ui container">
+        <h1 class="ui center aligned header">
+                <h2>Ciclo Lectivo Semestre {{school_year.semester}}</h2>
+                <h2>{{school_year.start_date.strftime('%Y-%m-%d')}} al {{school_year.ending_date.strftime('%Y-%m-%d')}}</h2>
+        </h1>
+        <form class="ui form" action="/asistencia/{{school_year_id}}/{{workshop_id}}/ver">
+            <div class="field">
+                    <label>Fecha</label>
+                    <div class="field">
+                        <input required name="date" type="date" />
+                    </div>
+                </div>
+            </div>
+            <button class="ui button green">Continuar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

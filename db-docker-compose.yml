@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: mariadb:10.1.41
+    environment:
+      MYSQL_DATABASE: grupo16
+      MYSQL_ROOT_PASSWORD: pass
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - 3306:3306
+    volumes:
+     - ./database/:/var/lib/mysql/
+     - ./db/:/docker-entrypoint-initdb.d/
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: pass
+    ports:
+      - 8080:80
+    links:
+      - db
+  web: 
+    build: 
+      dockerfile: docker/Dockerfile.dev
+      context: .
+    ports: 
+      - 5000:5000
+    volumes: 
+      - ./:/app
+    network_mode: host

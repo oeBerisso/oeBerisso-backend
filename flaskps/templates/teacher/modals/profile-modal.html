@@ -1,0 +1,22 @@
+<div id='profile-modal{{teacher.id}}' class="ui basic modal">
+    <div class="ui center aligned icon header">
+    
+        <i class="user icon"></i>
+        Perfil de {{teacher.first_name}} {{teacher.last_name}}
+    </div>
+    <div class="ui content">
+        <h3>Apellido y Nombre: {{teacher.last_name}}, {{teacher.first_name}} </h3>
+        <h3>{{teacher.document_type_id | translate_document_type}}: {{teacher.number}}</h3>
+        <h3>Genero: {{teacher.gender_id | translate_gender}}</h3>
+        <h3>Telefono de Contacto: {{teacher.phone}}</h3>
+        <h3>Fecha de Nacimiento: {{teacher.birth_date}}</h3>
+        <h3>Domicilio: {{teacher.home}}</h3>
+        <h3>Localidad: {{teacher.location_id | translate_location}}</h3>
+        </div>
+    <div class="actions">
+        <div class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            Cerrar
+        </div>
+    </div>
+</div>

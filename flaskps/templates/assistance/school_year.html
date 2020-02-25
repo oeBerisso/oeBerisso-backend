@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}Usuarios{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+	<div class="ui segment">
+		<div class="ui container">
+			<h1 class="ui center aligned header">
+				Listado de Alumnos
+			</h1>
+			<form action="{{url_for('asistance_create', school_year_id=school_year_id, workshop_id=workshop_id, date=dateSelected)}}" method="POST">
+				<table class="ui celled table">
+					<thead>
+						<tr>
+							<th>DNI</th>
+							<th>Nombre</th>
+							<th>Nivel</th>
+							<th>Escuela</th>
+							<th>Presentismo</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for student in students %}
+							<tr>
+								<td data-label="DNI">{{student.number}}</td>
+								<td data-label="Apellido, Nombre">{{student.last_name}}, {{student.first_name}}</td>
+								<td data-label="Nivel">{{student.level_id | translate_level}}</td>
+								<td data-label="Escuela">{{student.school_id | translate_school}}</td>
+								<td data-label="Presente">
+									{% if assistances[student.id] %}
+										Presente
+									{% else %}
+										Ausente
+									{% endif %}
+								</td>
+								<td data-label="Aciones">
+									{% if not assistances[student.id] %}
+										<input type="checkbox" name="{{student['id']}}">
+									{% else %}
+										<input type="checkbox" checked name="{{student.id}}">
+									{% endif %}
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<button class="ui button positive">Guardar</button>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}
+

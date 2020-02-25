@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="ui segment">
+        <h1 class="ui center aligned header">
+            Asignar Docentes al taller {{workshop_data.name}}
+        </h1>
+        {% for school_year in schoolar_years %}
+            <div class="ui segment">
+                <div class="ui horizontal divider">Semestre {{school_year.semester}} | {{school_year.start_date.strftime('%Y/%m/%d')}} - {{school_year.ending_date.strftime('%Y/%m/%d')}}</div>
+                <form action="/taller/{{workshop_data.id}}/{{school_year.id}}/asignar" method="POST">
+                    <select class="ui fluid dropdown" name="teachers" multiple>
+                        {% for teacher in teachers %}
+                            {% if is_assigned(workshop_data.id, school_year.id, teacher.id) %}
+                                <option name="{{teacher.id}}" value="{{teacher.id}}" selected="">{{teacher.first_name}} {{teacher.last_name}}</option>
+                            {% else %}
+                                <option value="{{teacher.id}}">{{teacher.first_name}} {{teacher.last_name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <div class="ui horizontal divider"></div>
+                    <button class="ui button primary">Guardar cambios</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

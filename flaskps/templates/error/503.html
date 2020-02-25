@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="ui container">
+        <div class="ui center aligned segment">
+            <h1 class="ui icon header">
+                <i class="settings icon"></i>
+                <div class="content">
+                    ERROR 503
+                    <div class="sub header">El servicio se encuentra actualmente en mantenimiento</div>
+                </div>
+            </h1>
+
+            <!-- Add the stylesheet to the head -->
+            <link rel="stylesheet" type="text/css" href="https://gitcdn.xyz/repo/pi0/clippyjs/master/assets/clippy.css">
+            <script src="https://unpkg.com/clippyjs@latest"></script>
+            <script type="text/javascript">
+        
+                clippy.load('Clippy', function(agent){
+                    // Do anything with the loaded agent
+                    agent.show();
+                    agent.moveTo(500,300);
+                    agent.speak("Oh!, parece que el sitio se encuentra en mantenimiento, intentalo mas tarde")
+                    setInterval(() => {
+                        agent.speak('Estas ahi?')
+                        agent.play('GetAttention')
+                    }, 20000)
+                });
+            </script>
+        </div>
+    </div>
+{% endblock %}

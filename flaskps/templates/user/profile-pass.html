@@ -1,0 +1,14 @@
+<div class="ui segment">
+    <h1 class="ui center aligned header">Modificar contraseña</h1>
+    <form class="ui form" action="{{ url_for('edit_pass') }}" method="POST">
+        <div class="field">
+            <label>Contraseña</label>
+            <input type="password" name="password" minlength="6" placeholder="Contraseña" required/>
+        </div>
+        <div class="field">
+            <label>Confirmar contraseña</label>
+            <input type="password" name="confirm_password" minlength="6" placeholder="Confirmar contraseña" required/>
+        </div>
+        <button class="fluid ui primary button" type="submit">Modificar contraseña</button>
+    </form>
+</div>

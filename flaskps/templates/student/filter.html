@@ -1,0 +1,56 @@
+<div class="ui container"> 
+    <h1 class="ui center aligned header">
+        Filtros
+    </h1>
+    <form action="estudiantes" class="ui form" method="GET">
+        <div class="ui form">
+            <div class="fields five fields">
+                <div class="field">
+                    <label>Documento</label>
+                    <input type="number" placeholder="Documento" value="{{dni}}" name='number'>
+                </div>
+                <div class="field">
+                    <label>Apellido o nombre</label>
+                    <input type="text" placeholder="Apellido o nombre" name='name' value="{{name}}">
+                </div>
+                <div class="field">
+                    <label>Nivel</label>
+                    <select class="ui fluid dropdown" name='level'>
+                        <option value="" disable>Nivel</option>
+                        {% for key in levels %}
+                            {% if key.id == level | int%}
+                                <option selected value="{{key.id}}">{{key.name}}</option>
+                            {%else%}
+                                <option value="{{key.id}}">{{key.name}}</option>
+                            {%endif%}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Escuela</label>
+                    <select class="ui fluid dropdown" name='school'>
+                        <option value="" disable>Escuela</option>
+                        {% for key in schools %}
+                            {% if key.id == school | int%}
+                                <option selected value="{{key.id}}">{{key.name}}</option>
+                            {%else%}
+                                <option value="{{key.id}}">{{key.name}}</option>
+                            {%endif%}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <br>
+                    <button class="ui primary icon button" type="submit" data-tooltip="Filtrar Estudiantes" data-position="bottom center">
+                        <i class="search icon"></i>
+                    </button>
+                    <button class="ui secondary icon button" type="button" onclick="window.location.href = '/estudiantes'" data-tooltip="Limpiar filtros" data-position="bottom center">
+                        <i class="times icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+    
+<div class="ui divider"></div>

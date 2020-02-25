@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="ui segment">
+      {% for schedules in all_schedules_parsed %}
+        {% if schedules.list %}
+          <div>
+            <div class="active title">
+                <i class="dropdown icon"></i>
+                {{schedules.start_date.strftime('%Y-%m-%d')}} - {{schedules.ending_date.strftime('%Y-%m-%d')}} (semestre {{schedules.semester}} )
+              </div>
+              <div class="active content">
+                <table class="ui single line table">
+                    <thead>
+                      <tr>
+                        <th>Nucleo</th>
+                        <th>Ciclo Lectivo</th>
+                        <th>Dia</th>
+                        <th>Horario</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for schedule in schedules.list %}
+                        <tr>
+                          <td>
+                            {{schedule['c.name']}}
+                          </td>
+                          <td>
+                            {{schedule.start_date.strftime('%Y-%m-%d')}} - {{schedule.ending_date.strftime('%Y-%m-%d')}} ( Semestre {{schedule.semester}} )
+                          </td>
+                          <td>
+                              {{schedule["d.name"]}}
+                          </td>
+                          <td>
+                            {{schedule.start_time}} - {{schedule.finish_time}}
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+              </div>
+              <div class="ui divider"></div>
+            {% endif %}
+          {% endfor %}
+        </div>
+    </div>
+{% endblock %}

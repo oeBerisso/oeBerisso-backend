@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block title %}Profesores{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %} 
+	<div class="ui segment">   
+
+        <h1 class="ui center aligned header">Modificar Profesor</h1>
+        <form class="ui form" action="{{ url_for('teacher_create') }}" method="POST">
+            <div class="field">
+               <label>Datos Personales</label>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="first_name" placeholder="Nombre" required/>
+                    </div>
+                    <div class="field">
+                        <label>Apellido</label>
+                        <input type="text" name="last_name" placeholder="Apellido" required/>
+                    </div>
+               </div>
+            </div>
+            <div class="three fields">
+                <div class="field">
+                    <label>Genero</label>
+                    <select class="ui fluid dropdown" name='gender'>    
+                        <option value="" disable>Genero</option>
+                        {% for key in genders %}
+                            <option value="{{key.id}}">{{key.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Tipo de documento</label>
+                    <select class="ui fluid dropdown" name='document_type'>
+                        <option value="" disable>Tipo de documento</option>
+                        {% for key in types %}
+                            <option value="{{key.id}}">{{key.nombre}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Numero de Documento</label>
+                    <input type="number" name="number" placeholder="Numero de Documento" required/>
+                </div>
+            </div>
+            <div class="four fields">
+                    <div class="field">
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" name="birth_date" placeholder="Fecha de Nacimiento" required/>
+                    </div>
+                    <div class="field">
+                        <label>Domicilio</label>
+                        <input type="text" name="home" placeholder="Domicilio" required/>
+                    </div>
+                    <div class="field">
+                        <label>Localidad</label>
+                        <select class="ui fluid dropdown" name='location'>
+                            <option value="" disable>Localidad</option>
+                            {% for key in locations %}
+                                <option value="{{key.id}}">{{key.nombre}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Telefono</label>
+                        <input type="text" name="phone" placeholder="Telefono" required/>
+                    </div>
+            </div>
+            <button class="fluid ui primary button" type="submit">Registrar</button>
+        </form>
+	</div>
+{% endblock %}

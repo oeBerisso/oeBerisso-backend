@@ -1,0 +1,46 @@
+<div id='workshopmodal-{{schoolar_year.id}}' class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+        Asignar talleres al ciclo lectivo {{schoolar_year.start_date.strftime('%Y/%m/%d')}} - {{schoolar_year.start_date.strftime('%Y/%m/%d')}} (semestre: {{schoolar_year.semester}})
+    </div>
+    <div class="image content">
+        <div class="description">
+            <div class="ui icon header">
+                Talleres
+            </div>
+            <div class="field">
+                <form action="/ciclo_lectivo/{{schoolar_year.id}}/asignar" class="ui form" method="POST">
+                    {% for line in workshops_lines %}
+                        <div class="ui horizontal segments">
+                            {% for workshop in line %}
+                                <div class="ui segment compact">
+                                    <div class="ui field toggle checkbox">
+                                        {% if workshop_in_school_year(workshop.id, schoolar_year.id) %}
+                                            <input type="checkbox" checked name="{{workshop.id}}" />
+                                        {% else %}
+                                            <input type="checkbox" name="{{workshop.id}}" />
+                                        {% endif %}
+                                        <label>
+                                            {{workshop.name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                    <br>
+                    <div class="field">
+                        <button class="ui primary button" type="submit" data-tooltip="Asignar roles" data-position="bottom center">
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+    <div class="actions">
+        <div class="ui black deny button">
+            Cancelar
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <div class="ui segment">    
+        <h1 class="ui center aligned header">Iniciar sesión</h1>
+        <form class="ui form" action="{{ url_for('auth_authenticate') }}" method="POST">
+            <div class="field">
+                <label>Usuarios</label>
+                <input type="text"  name="username" placeholder="Usuario" required>
+            </div>
+            <div class="field">
+                <label>Clave</label>
+                <input type="password" minlength="6" name="password" placeholder="Clave" required>
+            </div>
+            <button class="ui fluid primary button" type="submit">Iniciar sesion</button>
+        </form>
+    </div>
+{% endblock %}
+
+

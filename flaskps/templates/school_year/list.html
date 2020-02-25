@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block title %}{{configs.title.value}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+    <script src="{{url_for('static', filename='js/schoolar_year.js')}}"></script>
+    <div class="ui segment">   
+        <div class="ui container">
+            <h1 class="ui center aligned header">
+                Ciclo lectivo
+            </h1>
+            <table class="ui celled table">
+                <thead>
+                    <tr>
+                        <th>Semestre</th>
+                        <th>Fecha de inicio</th>
+                        <th>Fecha de fin</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for schoolar_year in schoolarYears %}
+                        <tr>
+                            <td data-label="semester">{{schoolar_year.semester}}</td>
+                            <td data-label="Fecha de inicio">{{schoolar_year.start_date}}</td>
+                            <td data-label="Email">{{schoolar_year.ending_date}}</td>
+                            <td data-label="Opciones">
+                                <button id='btn-workshopmodal-{{schoolar_year.id}}' class="ui icon primary button" data-tooltip="Asignar Taller" data-position="top center">
+                                    <i class="add alternate icon"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        {% include 'school_year/modals/assign_workshop.html' with context %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <script>
+                {% for schoolar_year in schoolarYears %}
+                    prepareSchoolarModal('workshopmodal-{{schoolar_year.id}}');
+                {% endfor %}
+            </script>
+        </div>
+    </div>
+{% endblock %}

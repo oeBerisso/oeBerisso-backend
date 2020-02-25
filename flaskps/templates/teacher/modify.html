@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block title %}Profesores{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+{% block content %} 
+	<div class="ui segment">   
+
+        <h1 class="ui center aligned header">Modificar Profesor</h1>
+        <form class="ui form" action="/profesor/{{teacher.id}}/modificar" method="POST">
+            <div class="field">
+               <label>Datos Personales</label>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Nombre</label>
+                        <input type="text" name="first_name" placeholder="Nombre" value="{{teacher.first_name}}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Apellido</label>
+                        <input type="text" name="last_name" placeholder="Apellido" value="{{teacher.last_name}}"required/>
+                    </div>
+               </div>
+            </div>
+            <div class="three fields">
+                <div class="field">
+                    <label>Genero</label>
+                    <select class="ui fluid dropdown" name='gender'>    
+                        <option value="" disable>Genero</option>
+                        {% for key in genders %}
+                            {% if key.id == teacher.gender_id %}
+                                <option value="{{key.id}}" selected>{{key.name}}</option>
+                            {% else %}
+                                <option value="{{key.id}}">{{key.name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Tipo de documento</label>
+                    <select class="ui fluid dropdown" name='document_type'>
+                        <option value="" disable>Tipo de documento</option>
+                        {% for key in types %}
+                            {% if  teacher.document_type_id == key.id | int  %}
+                                <option value="{{key.id}}" selected>{{key.nombre}}</option>
+                            {% else %}
+                                <option value="{{key.id}}">{{key.nombre}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Numero de Documento</label>
+                    <input type="number" name="number" placeholder="Numero de Documento" value="{{teacher.number}}" required/>
+                </div>
+            </div>
+            <div class="four fields">
+                    <div class="field">
+                        <label>Fecha de Nacimiento</label>
+                        <input type="date" name="birth_date" placeholder="Fecha de Nacimiento" value="{{teacher.birth_date}}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Domicilio</label>
+                        <input type="text" name="home" placeholder="Domicilio" value="{{teacher.home}}" required/>
+                    </div>
+                    <div class="field">
+                        <label>Localidad</label>
+                        <select class="ui fluid dropdown" name='location'>
+                            <option value="" disable>Localidad</option>
+                            {% for key in locations %}
+                                {% if  teacher.location_id == key.id | int  %}
+                                    <option value="{{key.id}}" selected>{{key.nombre}}</option>
+                                {% else %}
+                                    <option value="{{key.id}}">{{key.nombre}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Telefono</label>
+                        <input type="text" name="phone" placeholder="Telefono" value="{{teacher.phone}}" required/>
+                    </div>
+            </div>
+            <button class="fluid ui primary button" type="submit">Modificar</button>
+        </form>
+	</div>
+{% endblock %}

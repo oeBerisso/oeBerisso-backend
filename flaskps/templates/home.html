@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block head %}
+  {{ super() }}
+{% endblock %}
+{% block content %}
+<h1 class="ui header">{{configs.description.value}}
+  <div class="sub header">La Orquesta Escuela de Berisso comenzó a funcionar en septiembre del 2005 en el barrio de El Carmen de la localidad de Berisso bajo la dirección del Mtro. Juan Carlos Herrero, orientada especialmente a la atención de chicos en situación de vulnerabilidad socio-cultural.
+  Desde sus 20 alumnos iniciales fue creciendo hasta atender actualmente una matrícula de aproximadamente 530 chicos, distribuidos en los 15 núcleos que la conforman y dirigida a una franja etaria de 5 a 23 años, cubriendo en su accionar a la casi totalidad de los barrios de Berisso más los espacios cedidos por el Club Español y el Teatro Argentino</div>
+</h1>
+<div class="ui fitted divider"></div>
+<br />
+<div class="ui container left aligned">
+  <img class="ui large left floated image" alt="orqusta" src="{{url_for('static', filename='orquesta.jpg')}}">
+  <p>La Orquesta Escuela de Berisso comenzó a funcionar en septiembre del 2005 en el barrio de El Carmen de la localidad de Berisso bajo la dirección del Mtro. Juan Carlos Herrero, orientada especialmente a la atención de chicos en situación de vulnerabilidad socio-cultural.
+  Desde sus 20 alumnos iniciales fue creciendo hasta atender actualmente una matrícula de aproximadamente 530 chicos, distribuidos en los 15 núcleos que la conforman y dirigida a una franja etaria de 5 a 23 años, cubriendo en su accionar a la casi totalidad de los barrios de Berisso más los espacios cedidos por el Club Español y el Teatro Argentino
+  En 2012 marcó la apertura de sesión en la Honorable Cámara de Diputados de la Nación durante el tratamiento de la Ley para la recuperación de YPF, realizando la grabación del Himno Nacional Argentino en el mismo lugar. Sus alumnos se han presentado en escenarios de la categoría del Salón Dorado de la Municipalidad de La Plata, las Catedrales de La Plata y Buenos Aires , Senado de la Provincia, el Coliseo Podestá, el Teatro Argentino, Centro Cultural Néstor Kirchner y el Luna Park en nuestro país; en el exterior han participado en forma grupal e individual en experiencias musicales realizadas en Venezuela, Francia, EEUU y Brasil. A partir de su formación, alumnos de la Orquesta Escuela pudieron acceder a estudios universitarios en la Facultad de Bellas Artes de La Plata y la Universidad de Lanús.</p>
+  <br/>
+  <img class="ui large right floated image" alt="orqueta" src="{{url_for('static', filename='orquesta1.jpg')}}">
+  <p>Sus alumnos de nivel superior cumplen tareas docentes como agentes multiplicadores dentro de su misma estructura, además de lograr la inserción en los circuitos semiprofesionales de trabajo ocupando cargos en la Orquesta Municipal de Tango de Berisso, la Orquesta Sinfónica Municipal de Berisso a los que se sumaron posteriormente desempeños en la Camerata Académica del Teatro Argentino. Es responsable también de la formación musical de la primer alumna del Sistema de Orquestas en ingresar por concurso a la Orquesta Estable del Teatro Argentino. Asimismo en la actualidad ofrece una capacitación única en el país en Música de Cámara a cargo del Mtro. José Bondar.
+  En 2015, enmarcado en el festejo por sus 10 años, brindó una serie de conciertos entre los que se incluyó la invitación del Teatro Argentino para formar parte del Ciclo de la Sala A. Piazzolla, una presentación en el CCK de Bs. As, un concierto en el Teatro Mitre de San Salvador de Jujuy para presentarse junto al Sistema de Orquestas Juveniles de Jujuy bajo la dirección del Mtro. Sergio Jurado y el estreno de la Misa Mestiza, escrita en honor de SS el papa Francisco, junto al Vocal de Cámara Platense, el coro de Cámara de la facultad de Bellas Artes y el Ensamble de Percusión de Pehuajó, con la dirección del Mtro. Fernando Tomé.</p>
+  <br />
+  <p>Sus formaciones se han presentado bajo la dirección de los Mtros Ruben Cabanes, José Bondar, Sergio Jurado y Mario Benzecry, entre otros.
+  Fue distinguida en su labor educativa por la Fundación Florencio Pérez, con el Premio Daniel Román de la Dirección de Cultura de Berisso ; en 2014 la Federación de Entidades de Bien Público de Berisso hizo entrega de una distinción por Servicio Comunitario y en 2015 nuevamente con el Premio de Cultura Daniel Román por su Camerata.</p>
+</div>
+{% endblock %}

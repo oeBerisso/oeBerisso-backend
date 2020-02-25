@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+  </head>
+  <body style="background-color: #cccccc;">
+
+    <div class="page-container">
+      {% include 'navbar.html' with context %}
+  
+        <div id="content" class="ui container">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="ui {{category}} message">
+                  <i class="close icon"></i>
+                  <div class="header">
+                    {{message}}
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <div class="ui center aligned segment"> 
+            {% block content %}
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+      {% include 'footer.html' with context %}
+    <script src="{{url_for('static', filename='js/semantic-ui.js')}}"></script>
+  </body>
+</html>

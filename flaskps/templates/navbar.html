@@ -1,0 +1,118 @@
+<div id="navbar" class="ui menu" style="background-color: #1a91a1">
+    <a href="/">
+        <img src="{{url_for('static', filename='logo_flat.png')}}" alt="Emblema de la escuela" height="65"/>
+    </a>
+    {% block navbar %}
+    {% endblock %}
+
+    <div class="right item">
+        <a href="/nucleos" class="ui inverted button">Mapa de los nucleos</a>
+
+        {% if is_authenticated(session) %}
+            
+            {% if has_permission(user_permissions, ['config_index'])%}
+            <div class="ui dropdown item">
+                <div>Administracion</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if has_permission(user_permissions, ['config_index']) %}
+                        <a href="/admin" class="ui inverted button item">Cambiar configuracion</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if has_permission(user_permissions, ['users_index'])%}
+            <div class="ui dropdown item">
+                <div>Usuarios</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if has_permission(user_permissions, ['users_index']) %}
+                        <a href="/usuarios" class="ui inverted button item">Listar usuarios</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if has_permission(user_permissions, ['teacher_new']) or has_permission(user_permissions, ['teacher_index']) %}
+            <div class="ui dropdown item">
+                <div>Profesores</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if has_permission(user_permissions, ['teacher_new']) %}
+                        <a href="/registrar_profesor" class="ui inverted button item">Registrar Profesor</a>
+                    {% endif %}
+                    {% if has_permission(user_permissions, ['teacher_index']) %}
+                        <a href="/profesores" class="ui inverted button item">Listar Profesores</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if has_permission(user_permissions, ['student_new']) or has_permission(user_permissions, ['student_index']) %}
+            <div class="ui dropdown item">
+                <div>Estudiantes</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if has_permission(user_permissions, ['student_new']) %}
+                        <a href="/registrar_alumno" class="ui inverted button item">Registrar Estudiantes</a>
+                    {% endif %}
+                    {% if has_permission(user_permissions, ['assistace_list']) %}
+                        <a href="/asistencia" class="ui inverted button item">Asistencia</a>
+                    {% endif %}
+                    {% if has_permission(user_permissions, ['student_index']) %}
+                        <a href="/estudiantes" class="ui inverted button item">Listar Estudiantes</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if has_permission(user_permissions, ['instrument_new']) or has_permission(user_permissions, ['instrument_index']) %}
+            <div class="ui dropdown item">
+                <div>Instrumentos</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                    {% if has_permission(user_permissions, ['instrument_new']) %}
+                        <a href="/registrar_instrumento" class="ui inverted button item">Registrar Instrumento</a>
+                    {% endif %}
+                    {% if has_permission(user_permissions, ['instrument_index']) %}
+                        <a href="/instrumentos" class="ui inverted button item">Listar Instrumentos</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            {% if user_permissions and has_permission(user_permissions, ['school_year_show','school_year_new','workshop_index']) %}
+                <div class="ui dropdown item">
+                    <div>Cursos</div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        {% if has_permission(user_permissions, ['school_year_show']) %}
+                            <a href="{{url_for('school_year_list')}}" class="ui inverted button item">Ver ciclos lectivo</a>
+                        {% endif %}
+                        {% if has_permission(user_permissions, ['school_year_new']) %}
+                            <a href="{{url_for('school_year_new')}}" class="ui inverted button item">Cargar ciclo lectivo</a>
+                        {% endif %}
+                        <div class="divider"></div>
+                        {% if has_permission(user_permissions, ['workshop_index']) %}
+                            <a href="{{url_for('workshop_index')}}" class="ui inverted button item">Ver talleres</a>
+                        {% endif %}
+                        <div class="divider"></div>
+                        {% if has_permission(user_permissions, ['schedules_index']) %}
+                            <a href="{{url_for('schedules_index')}}" class="ui inverted button item">Ver horarios</a>
+                        {% endif %}
+                        {% if has_permission(user_permissions, ['schedules_new']) %}
+                            <a href="{{url_for('schedules_new')}}" class="ui inverted button item">Cargar horarios</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        <div class="ui dropdown item">
+            <div>{{is_authenticated(session)}}</div>
+            <i class="dropdown icon"></i>
+                <div class="menu">
+                    <a href="/perfil" class="ui inverted button item">Ver perfil</a>           
+                    <a href="/logout" class="ui inverted button item">Cerrar sesion</a>           
+                </div>
+            </div>
+        {% else %}
+            <a href="/login" class="ui inverted button">Iniciar sesion</a>
+            <a href="/registrarse" class="ui inverted button">Registrarse</a>
+        {% endif %}
+    </div>
+</div>

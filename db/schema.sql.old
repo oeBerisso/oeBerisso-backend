@@ -1,0 +1,785 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: db
+-- Generation Time: Nov 07, 2019 at 08:36 PM
+-- Server version: 10.1.41-MariaDB-1~bionic
+-- PHP Version: 7.2.22
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `grupo16`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assistance_student_workshop`
+--
+
+CREATE TABLE `assistance_student_workshop` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `school_year_id` int(11) NOT NULL,
+  `workshop_id` int(11) NOT NULL,
+  `date` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `configuration`
+--
+
+CREATE TABLE `configuration` (
+  `field` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `configuration`
+--
+
+INSERT INTO `configuration` (`field`, `value`, `title`) VALUES
+('description', 'Descripcion de la pagina web', 'Descripcion'),
+('elementsCount', '2', 'Cantidad de elementos por pagina'),
+('email', 'mail@mail.com', 'Correo electronico'),
+('maintenance', '0', 'Mantenimiento'),
+('title', 'Escuela Orquesta', 'titulo');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cores`
+--
+
+CREATE TABLE `cores` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `genders`
+--
+
+CREATE TABLE `genders` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `genders`
+--
+
+INSERT INTO `genders` (`id`, `name`) VALUES
+(1, 'Masculino'),
+(2, 'Femenino'),
+(3, 'Otro');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instruments`
+--
+
+CREATE TABLE `instruments` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `instrument_types`
+--
+
+CREATE TABLE `instrument_types` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `instrument_types`
+--
+
+INSERT INTO `instrument_types` (`id`, `name`) VALUES
+(1, 'Viento'),
+(2, 'Cuerda'),
+(3, 'Percusión');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `levels`
+--
+
+CREATE TABLE `levels` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`name`) VALUES
+('I'),
+('II'),
+('III'),
+('IV'),
+('V'),
+('VI'),
+('VII'),
+('VIII'),
+('IX'),
+('X'),
+('XI'),
+('XII');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `permissions`
+--
+
+CREATE TABLE `permissions` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `permissions`
+--
+
+INSERT INTO `permissions` (`id`, `name`) VALUES
+(1, 'config_index'),
+(2, 'student_index'),
+(3, 'student_new'),
+(4, 'student_destroy'),
+(5, 'student_update'),
+(6, 'student_show'),
+(7, 'config_update'),
+(8, 'users_show'),
+(9, 'users_update'),
+(10, 'users_destroy'),
+(11, 'users_index'),
+(12, 'users_new'),
+(13, 'users_new');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preceptors`
+--
+
+CREATE TABLE `preceptors` (
+  `id` int(11) NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preceptor_core`
+--
+
+CREATE TABLE `preceptor_core` (
+  `preceptor_id` int(11) NOT NULL,
+  `core_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `responsables`
+--
+
+CREATE TABLE `responsables` (
+  `id` int(11) NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `birth_date` date NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `home` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `gender_id` int(11) NOT NULL,
+  `document_type_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `responsable_student`
+--
+
+CREATE TABLE `responsable_student` (
+  `responsable_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`) VALUES
+(1, 'administrador'),
+(2, 'profesor');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_has_permission`
+--
+
+CREATE TABLE `role_has_permission` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `role_has_permission`
+--
+
+INSERT INTO `role_has_permission` (`id`, `role_id`, `permission_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 3),
+(4, 1, 4),
+(5, 1, 5),
+(6, 1, 6),
+(7, 1, 7),
+(8, 1, 8),
+(9, 1, 9),
+(10, 1, 10),
+(11, 1, 11),
+(12, 1, 12),
+(13, 1, 13),
+(14, 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `schools`
+--
+
+CREATE TABLE `schools` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `schools`
+--
+
+INSERT INTO `schools` (`name`, `address`, `phone`) VALUES
+('502', NULL, NULL),
+('Albert Thomas', NULL, NULL),
+('Anexa', NULL, NULL),
+('Anexo T. Speroni', NULL, NULL),
+('Basiliana', NULL, NULL),
+('Basiliano', NULL, NULL),
+('Bellas Artes', NULL, NULL),
+('Canossiano', NULL, NULL),
+('Castañeda', NULL, NULL),
+('Col. Nacional', NULL, NULL),
+('Conquista Cristiana', NULL, NULL),
+('Dardo Rocha N° 24', NULL, NULL),
+('E.E.M.N° 2', NULL, NULL),
+('E.M. N°26', NULL, NULL),
+('E.P. Municipal N° 2', NULL, NULL),
+('EE N° 2', NULL, NULL),
+('EEE N° 501', NULL, NULL),
+('EEE N°501', NULL, NULL),
+('EEM N° 1', NULL, NULL),
+('EEM N° 26 L.P', NULL, NULL),
+('EEM N°128', NULL, NULL),
+('EEM N°2', NULL, NULL),
+('EES N° 10', NULL, NULL),
+('EES N° 14', NULL, NULL),
+('EES N° 4', NULL, NULL),
+('EES N° 4 Berisso', NULL, NULL),
+('EES N° 4 El Pino', NULL, NULL),
+('EEST N° 1 bsso', NULL, NULL),
+('EET Nº 1', NULL, NULL),
+('EET Nº1', NULL, NULL),
+('EGB N°25', NULL, NULL),
+('EM N° 2', NULL, NULL),
+('EMM N° 3', NULL, NULL),
+('EP N° 1 L.P-', NULL, NULL),
+('EP N° 11', NULL, NULL),
+('EP N° 129', NULL, NULL),
+('EP N° 14', NULL, NULL),
+('EP N° 15', NULL, NULL),
+('EP N° 17', NULL, NULL),
+('EP N° 18', NULL, NULL),
+('EP N° 19', NULL, NULL),
+('EP N° 2', NULL, NULL),
+('EP N° 20', NULL, NULL),
+('EP N° 22', NULL, NULL),
+('EP N° 25', NULL, NULL),
+('EP N° 27', NULL, NULL),
+('EP N° 3', NULL, NULL),
+('EP N° 37 LP', NULL, NULL),
+('EP N° 43', NULL, NULL),
+('EP N° 45', NULL, NULL),
+('EP N° 5', NULL, NULL),
+('EP N° 6', NULL, NULL),
+('EP N° 65 La Plata', NULL, NULL),
+('EP N° 7', NULL, NULL),
+('EPB N° 10', NULL, NULL),
+('EPB N° 14', NULL, NULL),
+('EPB N° 15', NULL, NULL),
+('EPB N° 19', NULL, NULL),
+('EPB N° 2', NULL, NULL),
+('EPB N° 20', NULL, NULL),
+('EPB N° 24', NULL, NULL),
+('EPB N° 25', NULL, NULL),
+('EPB N° 45', NULL, NULL),
+('EPB N° 5', NULL, NULL),
+('EPB N° 55', NULL, NULL),
+('EPB N° 6', NULL, NULL),
+('EPB N° 65', NULL, NULL),
+('EPB N° 8', NULL, NULL),
+('ESB N° 10', NULL, NULL),
+('ESB N° 11', NULL, NULL),
+('ESB N° 14', NULL, NULL),
+('ESB N° 3', NULL, NULL),
+('ESB N° 61', NULL, NULL),
+('ESB N° 66', NULL, NULL),
+('ESB N° 8', NULL, NULL),
+('ESB N° 9', NULL, NULL),
+('ESC N° 10', NULL, NULL),
+('ESC N° 13', NULL, NULL),
+('ESC N° 19', NULL, NULL),
+('ESC N° 2', NULL, NULL),
+('ESC N° 20', NULL, NULL),
+('ESC N° 22', NULL, NULL),
+('ESC N° 23', NULL, NULL),
+('ESC N° 24', NULL, NULL),
+('ESC N° 25', NULL, NULL),
+('ESC N° 27', NULL, NULL),
+('ESC N° 3', NULL, NULL),
+('ESC N° 43', NULL, NULL),
+('ESC N° 45', NULL, NULL),
+('ESC N° 5', NULL, NULL),
+('ESC N° 501', NULL, NULL),
+('ESC N° 6', NULL, NULL),
+('ESC N° 66', NULL, NULL),
+('ESC N° 7', NULL, NULL),
+('ESC N° 8', NULL, NULL),
+('ESC N°11', NULL, NULL),
+('ESC N°17', NULL, NULL),
+('ESC N°19', NULL, NULL),
+('ESC N°3', NULL, NULL),
+('ESC N°7', NULL, NULL),
+('ESC de Arte', NULL, NULL),
+('ESS N° 4', NULL, NULL),
+('Enseñanza Media', NULL, NULL),
+('Especial N° 502', NULL, NULL),
+('Estrada', NULL, NULL),
+('FACULTAD', NULL, NULL),
+('INDUSTRIAL', NULL, NULL),
+('Italiana', NULL, NULL),
+('J 904', NULL, NULL),
+('J. Manuel Strada', NULL, NULL),
+('Jacarandá', NULL, NULL),
+('Jardín Euforion', NULL, NULL),
+('Jardín N° 903', NULL, NULL),
+('Jardín N° 907', NULL, NULL),
+('JoaquinV.Gonzalez', NULL, NULL),
+('Lola Mora sec', NULL, NULL),
+('Lujan Sierra', NULL, NULL),
+('MUNICIOAL 11', NULL, NULL),
+('María Auxiliadora', NULL, NULL),
+('María Reina', NULL, NULL),
+('Media 2 España', NULL, NULL),
+('Media N 1', NULL, NULL),
+('Mercedita de S.Martin', NULL, NULL),
+('Monseñor Alberti', NULL, NULL),
+('Mtro Luis MKEY', NULL, NULL),
+('Mñor. Rasore', NULL, NULL),
+('N1 Francisco', NULL, NULL),
+('Normal 2', NULL, NULL),
+('Normal 3 LP', NULL, NULL),
+('Normal n 2', NULL, NULL),
+('Ntra Sra Lourdes', NULL, NULL),
+('Ntra. Sra. del Valle', NULL, NULL),
+('PSICOLOGIA', NULL, NULL),
+('Parroquial', NULL, NULL),
+('Pasos del Libertedor', NULL, NULL),
+('Ped 61', NULL, NULL),
+('Pedagogica', NULL, NULL),
+('SEC N° 8', NULL, NULL),
+('SEC N°17', NULL, NULL),
+('San Simón', NULL, NULL),
+('Santa Rosa', NULL, NULL),
+('Sra de Fátima', NULL, NULL),
+('Sta Margarita', NULL, NULL),
+('Sta Ro. de Lima', NULL, NULL),
+('Sta Rosa', NULL, NULL),
+('Sta Rosa Lima', NULL, NULL),
+('Sta. R. de Lima', NULL, NULL),
+('Sta. Rosa de lima', NULL, NULL),
+('Técnica N° 1', NULL, NULL),
+('Técnica N° 1 Berisso', NULL, NULL),
+('Técnica N° 5', NULL, NULL),
+('Técnica N° 7', NULL, NULL),
+('UCALP', NULL, NULL),
+('UNLP', NULL, NULL),
+('UTN', NULL, NULL),
+('Universitas', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_years`
+--
+
+CREATE TABLE `school_years` (
+  `id` int(11) NOT NULL,
+  `start_date` datetime DEFAULT NULL,
+  `ending_date` datetime DEFAULT NULL,
+  `semester` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_year_workshop`
+--
+
+CREATE TABLE `school_year_workshop` (
+  `workshop_id` int(11) NOT NULL,
+  `school_year_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `students`
+--
+
+CREATE TABLE `students` (
+  `id` int(11) NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `birth_date` date NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `level_id` int(11) NOT NULL,
+  `home` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `gender_id` int(11) NOT NULL,
+  `school_id` int(11) NOT NULL,
+  `document_type_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `town_down_id` int(11) NOT NULL,
+  `place_of_birth` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_workshop`
+--
+
+CREATE TABLE `student_workshop` (
+  `student_id` int(11) NOT NULL,
+  `school_year_id` int(11) NOT NULL,
+  `workshop_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `id` int(11) NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `first_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `birth_date` date NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `home` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `gender_id` int(11) NOT NULL,
+  `document_type_id` int(11) NOT NULL,
+  `number` int(11) NOT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_responsable_workshop`
+--
+
+CREATE TABLE `teacher_responsable_workshop` (
+  `teacher_id` int(11) NOT NULL,
+  `school_year_id` int(11) NOT NULL,
+  `workshop_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `town_down`
+--
+
+CREATE TABLE `town_down` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `town_down`
+--
+
+INSERT INTO `town_down` (`name`) VALUES
+('Barrio Náutico'),
+('Barrio Obrero'),
+('Berisso'),
+('Barrio Solidaridad'),
+('Barrio Obrero'),
+('Barrio Bco. Pcia.'),
+('Barrio J.B. Justo'),
+('Barrio Obrero'),
+('El Carmen'),
+('El Labrador'),
+('Ensenada'),
+('La Hermosura'),
+('La PLata'),
+('Los Talas'),
+('Ringuelet'),
+('Tolosa'),
+('Villa Alba'),
+('Villa Arguello'),
+('Villa B. C'),
+('Villa Elvira'),
+('Villa Nueva'),
+('Villa Paula'),
+('Villa Progreso'),
+('Villa San Carlos'),
+('Villa Zula');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) COLLATE utf8_bin NOT NULL,
+  `username` varchar(255) COLLATE utf8_bin NOT NULL,
+  `password` varchar(255) COLLATE utf8_bin NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `first_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `last_name` varchar(255) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `active`, `updated_at`, `created_at`, `first_name`, `last_name`) VALUES
+(1, 'fede@mail.com', 'fede', SHA1('fede12'), 1, '2019-10-24 15:05:48', '2019-10-21 00:00:00', 'Federico', 'Gasquez'),
+(2, 'agustin@mail.com', 'agustin', SHA1('agustin'), 1, '2019-10-30 11:37:23', '2019-10-21 00:00:00', 'agustin', 'agustin'),
+(3, 'jorge@mail.com', 'jorge', SHA1('jorge1'), 0, '2019-10-24 15:05:53', '2019-10-21 00:00:00', 'jorge', 'agustin'),
+(4, 'matias@mail.com', 'matias', SHA1('matias'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'matias', 'agustin'),
+(5, 'lautaro@mail.com', 'lautaro', SHA1('lautaro'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'lautaro', 'agustin'),
+(6, 'yesica@mail.com', 'yesica', SHA1('yesica'), 0, '2019-10-24 14:52:00', '2019-10-21 00:00:00', 'yesica', 'agustin'),
+(7, 'ayelen@mail.com', 'ayelen', SHA1('ayelen'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'ayelen', 'agustin'),
+(8, 'maria@mail.com', 'maria', SHA1('maria'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'maria', 'agustin'),
+(9, 'federico@mail.com', 'federico', SHA1('federico'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'federico', 'agustin'),
+(10, 'camila@mail.com', 'camila', SHA1('camila'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'camila', 'agustin'),
+(11, 'celesten@mail.com', 'celeste', SHA1('celeste'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'celeste', 'agustin'),
+(12, 'julieta@mail.com', 'julieta', SHA1('julieta'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'julieta', 'agustin'),
+(13, 'rocio@mail.com', 'rocio', SHA1('rocio1'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'rocio', 'agustin'),
+(14, 'juan@mail.com', 'juan', SHA1('juan12'), 0, '2019-10-24 16:31:43', '2019-10-21 00:00:00', 'juan', 'agustin'),
+(15, 'nahuel@mail.com', 'nahuel', SHA1('nahuel'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'nahuel', 'agustin'),
+(16, 'milagros@mail.com', 'milagros', SHA1('milagros'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'milagros', 'agustin'),
+(17, 'roberto@mail.com', 'roberto', SHA1('roberto'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'roberto', 'agustin'),
+(18, 'carlos@mail.com', 'carlos', SHA1('carlos'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'carlos', 'agustin'),
+(19, 'alicia@mail.com', 'alicia', SHA1('alicia'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'alicia', 'agustin'),
+(20, 'mariela@mail.com', 'mariela', SHA1('mariela'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'mariela', 'agustin'),
+(22, 'agustin@mail.com', 'agustin', SHA1('agustin'), 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'agustin', 'agustin');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_has_role`
+--
+
+CREATE TABLE `user_has_role` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `user_has_role`
+--
+
+INSERT INTO `user_has_role` (`id`, `user_id`, `role_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(7, 2, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workshops`
+--
+
+CREATE TABLE `workshops` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `short_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `assistance_student_workshop`
+--
+ALTER TABLE `assistance_student_workshop`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_assistance_student_id` (`student_id`),
+  ADD KEY `FK_assistance_school_year_id` (`school_year_id`),
+  ADD KEY `FK_assistance_workshop_id` (`workshop_id`);
+
+--
+-- Indexes for table `configuration`
+--
+ALTER TABLE `configuration`
+  ADD PRIMARY KEY (`field`);
+
+--
+-- Indexes for table `cores`
+--
+ALTER TABLE `cores`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `genders`
+--
+ALTER TABLE `genders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `instruments`
+--
+ALTER TABLE `instruments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_instrument_type_id` (`type_id`);
+
+--
+-- Indexes for table `permissions`
+--
+ALTER TABLE `permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_has_permission`
+--
+ALTER TABLE `role_has_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `permiso` (`permission_id`),
+  ADD KEY `rol_id` (`role_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_has_role`
+--
+ALTER TABLE `user_has_role`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user` (`user_id`),
+  ADD KEY `rol` (`role_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `permissions`
+--
+ALTER TABLE `permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `role_has_permission`
+--
+ALTER TABLE `role_has_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `user_has_role`
+--
+ALTER TABLE `user_has_role`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
