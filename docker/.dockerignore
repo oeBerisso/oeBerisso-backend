@@ -1,0 +1,7 @@
+database/
+__pycache__/
+docker-compose.yml
+
+db/
+database
+flask_session/
