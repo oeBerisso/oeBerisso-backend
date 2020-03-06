@@ -1,2 +1,2 @@
 # oeBerisso-backend
-python-flash backend for OEBerisso
+python-flask backend for OEBerisso
