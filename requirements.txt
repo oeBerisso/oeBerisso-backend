@@ -5,6 +5,7 @@ certifi==2019.9.11
 chardet==3.0.4
 Click==7.0
 Flask==1.1.1
+Flask-JWT-Extended==3.24.1
 flask-paginate==0.5.4
 Flask-Session==0.3.1
 get==2019.4.13
@@ -13,13 +14,15 @@ itsdangerous==1.1.0
 jason==0.1.7
 Jinja2==2.10.3
 MarkupSafe==1.1.1
+numpy==1.17.4
 post==2019.4.13
 public==2019.4.13
+PyJWT==1.7.1
 PyMySQL==0.9.3
 query-string==2019.4.13
 regex==2019.11.1
 requests==2.22.0
+six==1.14.0
 toml==0.10.0
 urllib3==1.25.6
 Werkzeug==0.16.0
-numpy==1.17.4
