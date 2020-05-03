@@ -4,6 +4,7 @@ from flaskps.models.user import User
 from flaskps.config import Config
 from flaskps.helpers import form_validator
 from flaskps.validations import register
+import json
 
 import requests
 
@@ -21,6 +22,32 @@ def google_login(client):
         scope=["openid", "email", "profile"],
     )
     return redirect(request_uri)
+
+def google_callback(client):
+    code = request.args.get("code")
+    google_provider_cfg = requests.get(Config.GOOGLE_DISCOVERY_URL).json()
+    token_endpoint = google_provider_cfg["token_endpoint"]
+
+    token_url, headers, body = client.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url,
+        redirect_url=request.base_url,
+        code=code
+    )
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(Config.GOOGLE_CLIENT_ID, Config.GOOGLE_CLIENT_SECRET),
+    )
+
+    # Parse the tokens!
+    client.parse_request_body_response(json.dumps(token_response.json()))
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    uri, headers, body = client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(uri, headers=headers, data=body)
+    raise Exception(userinfo_response.json())
+
 
 def create():
     if not form_validator.validate(register.rules, request.json):
