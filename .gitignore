@@ -109,3 +109,4 @@ flaskps/config/production.py
 
 flask_session/
 .vscode/settings.json
+docker-compose.yml
