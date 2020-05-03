@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from flask import jsonify, session, request, redirect
 from flaskps.db import get_db
 from flaskps.models.user import User
