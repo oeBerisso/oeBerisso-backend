@@ -16,8 +16,8 @@ class User(object):
     def roles_for_user(cls, id):
         sql = """
             SELECT r.id AS roleid, r.name as rolename
-            FROM users AS u LEFT JOIN user_has_role AS ur ON u.id = ur.user_id    
-            LEFT JOIN roles AS r ON r.id = ur.role_id   
+            FROM users AS u LEFT JOIN user_has_role AS ur ON u.id = ur.user_id
+            LEFT JOIN roles AS r ON r.id = ur.role_id
             WHERE u.id = %s
         """
         cursor = cls.db.cursor()
@@ -142,10 +142,10 @@ class User(object):
     @classmethod
     def get_roles_from_username(cls, username):
         sql = """
-            SELECT name FROM roles r 
-            INNER JOIN user_has_role ur ON r.id = ur.role_id 
-            INNER JOIN users u ON ur.user_id = u.id 
-            WHERE u.username = %s 
+            SELECT name FROM roles r
+            INNER JOIN user_has_role ur ON r.id = ur.role_id
+            INNER JOIN users u ON ur.user_id = u.id
+            WHERE u.username = %s
         """
 
         cursor = cls.db.cursor()
