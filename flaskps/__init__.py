@@ -11,8 +11,14 @@ from flask_jwt_extended import (
     create_access_token,
     get_jwt_identity,
 )
+from oauthlib.oauth2 import WebApplicationClient
 
 app = Flask(__name__)
+
+app.secret_key = Config.GOOGLE_CLIENT_SECRET
+# OAuth 2 client setup
+client = WebApplicationClient(Config.GOOGLE_CLIENT_ID)
+
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "sdlkjhghsgfinjpjaSOJIdSFOJSAdKJFA1"
@@ -23,6 +29,10 @@ jwt = JWTManager(app)
 
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
+@app.route("/glogin")
+def glogin():
+    return auth.google_login(client)
 
 # routes
 app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
