@@ -27,4 +27,7 @@ services:
       - 5000:5000
     volumes:
       - ./:/app
+    environment:
+      GOOGLE_CLIENT_ID: 478339867097-ouuaam7pmidot05gl9krd3296obmj97f.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: Fp6YqdzjE3awdZJSqTY29vi6
     network_mode: host
