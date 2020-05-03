@@ -28,6 +28,6 @@ services:
     volumes:
       - ./:/app
     environment:
-      GOOGLE_CLIENT_ID: 478339867097-ouuaam7pmidot05gl9krd3296obmj97f.apps.googleusercontent.com
-      GOOGLE_CLIENT_SECRET: Fp6YqdzjE3awdZJSqTY29vi6
+      GOOGLE_CLIENT_ID: sarasa.google
+      GOOGLE_CLIENT_SECRET: sarasa-secreto
     network_mode: host

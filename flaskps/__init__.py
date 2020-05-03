@@ -1,4 +1,4 @@
-from flask import Flask, flash, request, url_for, jsonify
+from flask import Flask, flash, request, url_for, jsonify, json
 from flask_session import Session
 from flaskps.config import Config
 from flaskps.decorators.auth import login_required
@@ -33,6 +33,10 @@ Session(app)
 @app.route("/glogin")
 def glogin():
     return auth.google_login(client)
+
+@app.route("/glogin/callback")
+def glogin_callback():
+    return auth.google_callback(client)
 
 # routes
 app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
@@ -69,3 +73,6 @@ def site_map():
             url = url_for(rule.endpoint, **(rule.defaults or {}))
             links.append((url, rule.endpoint))
     return jsonify({"url": links})
+
+if __name__ == "__main__":
+    app.run(ssl_context='adhoc')
