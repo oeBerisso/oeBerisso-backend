@@ -5,12 +5,13 @@ from flaskps.helpers import form_validator
 from flaskps.validations import register
 
 def create():
-    if not form_validator.validate(register.rules, request.json):
+    errors = form_validator.validate(register.rules, request.json, True)
+    if not errors:
         User.db = get_db()
         User.create(request.json)
-        return jsonify({"response":"todo pillo"}), 200
+        return 200
     else:
-        return jsonify({"response":"toca de aca"}), 422
+        return jsonify({"errors": errors}), 422
 
 
 
