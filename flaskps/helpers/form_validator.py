@@ -42,9 +42,12 @@ def validate(rules, form=[], js=False):
             else:
                 error_count += result
 
-            if (result == 1 or result == "El campo " + str(rules[field_rules]["name"]) + " es requerido") and rule == "presence":
+            if (result == 1 or result == "El campo es requerido") and rule == "presence":
                 break
     if js:
+        for key in list(json.keys()):
+            if len(json[key]) == 0: json.pop(key)
+
         return json
     else:
         return error_count
