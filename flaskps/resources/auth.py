@@ -91,7 +91,7 @@ def create():
     if not errors:
         User.db = get_db()
         User.create(request.json)
-        return 200
+        return jsonify({}), 201
     else:
         return jsonify({"errors": errors}), 422
 

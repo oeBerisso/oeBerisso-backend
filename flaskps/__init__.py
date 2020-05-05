@@ -19,10 +19,10 @@ app.secret_key = Config.GOOGLE_CLIENT_SECRET
 # OAuth 2 client setup
 client = WebApplicationClient(Config.GOOGLE_CLIENT_ID)
 
-CORS(app, resources={r"/api/*": {"origins": "*"}})
 # Setup the Flask-JWT-Extended extension
 app.config["JWT_SECRET_KEY"] = "sdlkjhghsgfinjpjaSOJIdSFOJSAdKJFA1"
 app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.config.from_object(Config)
 jwt = JWTManager(app)
 
