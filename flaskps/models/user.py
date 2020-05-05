@@ -46,6 +46,26 @@ class User(object):
         return True
 
     @classmethod
+    def create_from_google(cls, email, username, first_name, last_name):
+        sql = """
+            INSERT INTO users (email, username, first_name, last_name, is_social)
+            VALUES (%s, %s, SHA1(%s), %s, %s)
+        """
+        cursor = cls.db.cursor()
+        cursor.execute(
+            sql,
+            (
+                email,
+                'g_{username}',
+                first_name,
+                last_name,
+                1,
+            ),
+        )
+        cls.db.commit()
+        return True
+
+    @classmethod
     def update(cls, username, name, last_name, email):
         sql = """
             UPDATE users

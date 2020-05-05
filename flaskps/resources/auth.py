@@ -24,6 +24,8 @@ def google_login(client):
     return redirect(request_uri)
 
 def google_callback(client):
+    User.db = get_db()
+
     code = request.args.get("code")
     google_provider_cfg = requests.get(Config.GOOGLE_DISCOVERY_URL).json()
     token_endpoint = google_provider_cfg["token_endpoint"]
@@ -46,7 +48,42 @@ def google_callback(client):
     userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
     uri, headers, body = client.add_token(userinfo_endpoint)
     userinfo_response = requests.get(uri, headers=headers, data=body)
-    raise Exception(userinfo_response.json())
+    
+    # raise Exception(userinfo_response.json())
+    response = userinfo_response.json()
+    
+    user = User.find_by_email(response["email"])
+    is_new = False
+    status = True
+    if not user:
+        # google => oeberisso
+        # ------------------------
+        # given_name => first_name
+        # family_name => last_name
+        # email => email
+
+        username, dom = response["email"].split('@')
+        User.create_from_google(response["email"], username, response["given_name"], response["family_name"])
+        msg = "Se creo el usuario"
+        is_new = True
+
+    if not is_new and status and user["active"] == 0:
+        msg = "El usuario no se encuentra activo."
+        status = False
+
+    if status:
+        session["user"] = username if is_new else user["username"]
+        if not is_new:
+            msg = "La sesión se inició correctamente."
+
+    return jsonify(
+        {
+            "status": status,
+            "msg": msg,
+            "username": session["user"],
+            "email": response["email"],
+        }
+    )
 
 
 def create():
