@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: db
--- Generation Time: Dec 10, 2019 at 04:17 PM
--- Server version: 10.1.41-MariaDB-1~bionic
--- PHP Version: 7.2.22
+-- Servidor: db
+-- Tiempo de generación: 05-05-2020 a las 00:31:24
+-- Versión del servidor: 10.1.41-MariaDB-1~bionic
+-- Versión de PHP: 7.4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `grupo16`
+-- Base de datos: `grupo16`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `assistance_student_workshop`
+-- Estructura de tabla para la tabla `assistance_student_workshop`
 --
 
 CREATE TABLE `assistance_student_workshop` (
@@ -37,7 +36,7 @@ CREATE TABLE `assistance_student_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `assistance_student_workshop`
+-- Volcado de datos para la tabla `assistance_student_workshop`
 --
 
 INSERT INTO `assistance_student_workshop` (`id`, `student_id`, `school_year_id`, `workshop_id`, `date`) VALUES
@@ -46,7 +45,7 @@ INSERT INTO `assistance_student_workshop` (`id`, `student_id`, `school_year_id`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `configuration`
+-- Estructura de tabla para la tabla `configuration`
 --
 
 CREATE TABLE `configuration` (
@@ -56,7 +55,7 @@ CREATE TABLE `configuration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `configuration`
+-- Volcado de datos para la tabla `configuration`
 --
 
 INSERT INTO `configuration` (`field`, `value`, `title`) VALUES
@@ -69,7 +68,7 @@ INSERT INTO `configuration` (`field`, `value`, `title`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cores`
+-- Estructura de tabla para la tabla `cores`
 --
 
 CREATE TABLE `cores` (
@@ -80,7 +79,7 @@ CREATE TABLE `cores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `cores`
+-- Volcado de datos para la tabla `cores`
 --
 
 INSERT INTO `cores` (`id`, `name`, `address`, `phone`) VALUES
@@ -99,7 +98,7 @@ INSERT INTO `cores` (`id`, `name`, `address`, `phone`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `days`
+-- Estructura de tabla para la tabla `days`
 --
 
 CREATE TABLE `days` (
@@ -108,7 +107,7 @@ CREATE TABLE `days` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `days`
+-- Volcado de datos para la tabla `days`
 --
 
 INSERT INTO `days` (`id`, `name`) VALUES
@@ -123,7 +122,7 @@ INSERT INTO `days` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `genders`
+-- Estructura de tabla para la tabla `genders`
 --
 
 CREATE TABLE `genders` (
@@ -132,7 +131,7 @@ CREATE TABLE `genders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `genders`
+-- Volcado de datos para la tabla `genders`
 --
 
 INSERT INTO `genders` (`id`, `name`) VALUES
@@ -143,7 +142,7 @@ INSERT INTO `genders` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `instruments`
+-- Estructura de tabla para la tabla `instruments`
 --
 
 CREATE TABLE `instruments` (
@@ -157,7 +156,7 @@ CREATE TABLE `instruments` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `instrument_types`
+-- Estructura de tabla para la tabla `instrument_types`
 --
 
 CREATE TABLE `instrument_types` (
@@ -166,7 +165,7 @@ CREATE TABLE `instrument_types` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `instrument_types`
+-- Volcado de datos para la tabla `instrument_types`
 --
 
 INSERT INTO `instrument_types` (`id`, `name`) VALUES
@@ -189,7 +188,7 @@ INSERT INTO `instrument_types` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `levels`
+-- Estructura de tabla para la tabla `levels`
 --
 
 CREATE TABLE `levels` (
@@ -198,7 +197,7 @@ CREATE TABLE `levels` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `levels`
+-- Volcado de datos para la tabla `levels`
 --
 
 INSERT INTO `levels` (`id`, `name`) VALUES
@@ -218,7 +217,7 @@ INSERT INTO `levels` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `map_points`
+-- Estructura de tabla para la tabla `map_points`
 --
 
 CREATE TABLE `map_points` (
@@ -229,7 +228,7 @@ CREATE TABLE `map_points` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `map_points`
+-- Volcado de datos para la tabla `map_points`
 --
 
 INSERT INTO `map_points` (`name`, `latitude`, `longitude`, `id`) VALUES
@@ -248,7 +247,7 @@ INSERT INTO `map_points` (`name`, `latitude`, `longitude`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `permissions`
+-- Estructura de tabla para la tabla `permissions`
 --
 
 CREATE TABLE `permissions` (
@@ -257,7 +256,7 @@ CREATE TABLE `permissions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `permissions`
+-- Volcado de datos para la tabla `permissions`
 --
 
 INSERT INTO `permissions` (`id`, `name`) VALUES
@@ -304,7 +303,7 @@ INSERT INTO `permissions` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preceptors`
+-- Estructura de tabla para la tabla `preceptors`
 --
 
 CREATE TABLE `preceptors` (
@@ -317,7 +316,7 @@ CREATE TABLE `preceptors` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `preceptor_core`
+-- Estructura de tabla para la tabla `preceptor_core`
 --
 
 CREATE TABLE `preceptor_core` (
@@ -328,7 +327,7 @@ CREATE TABLE `preceptor_core` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `responsables`
+-- Estructura de tabla para la tabla `responsables`
 --
 
 CREATE TABLE `responsables` (
@@ -347,7 +346,7 @@ CREATE TABLE `responsables` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `responsable_student`
+-- Estructura de tabla para la tabla `responsable_student`
 --
 
 CREATE TABLE `responsable_student` (
@@ -358,7 +357,7 @@ CREATE TABLE `responsable_student` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Estructura de tabla para la tabla `roles`
 --
 
 CREATE TABLE `roles` (
@@ -367,7 +366,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `roles`
+-- Volcado de datos para la tabla `roles`
 --
 
 INSERT INTO `roles` (`id`, `name`) VALUES
@@ -378,7 +377,7 @@ INSERT INTO `roles` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `role_has_permission`
+-- Estructura de tabla para la tabla `role_has_permission`
 --
 
 CREATE TABLE `role_has_permission` (
@@ -388,7 +387,7 @@ CREATE TABLE `role_has_permission` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `role_has_permission`
+-- Volcado de datos para la tabla `role_has_permission`
 --
 
 INSERT INTO `role_has_permission` (`id`, `role_id`, `permission_id`) VALUES
@@ -460,7 +459,7 @@ INSERT INTO `role_has_permission` (`id`, `role_id`, `permission_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schedules`
+-- Estructura de tabla para la tabla `schedules`
 --
 
 CREATE TABLE `schedules` (
@@ -473,7 +472,7 @@ CREATE TABLE `schedules` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `schedules`
+-- Volcado de datos para la tabla `schedules`
 --
 
 INSERT INTO `schedules` (`id`, `day_id`, `school_year_workshop_id`, `core_id`, `start_time`, `finish_time`) VALUES
@@ -486,7 +485,7 @@ INSERT INTO `schedules` (`id`, `day_id`, `school_year_workshop_id`, `core_id`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `schools`
+-- Estructura de tabla para la tabla `schools`
 --
 
 CREATE TABLE `schools` (
@@ -497,7 +496,7 @@ CREATE TABLE `schools` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `schools`
+-- Volcado de datos para la tabla `schools`
 --
 
 INSERT INTO `schools` (`id`, `name`, `address`, `phone`) VALUES
@@ -661,7 +660,7 @@ INSERT INTO `schools` (`id`, `name`, `address`, `phone`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `school_years`
+-- Estructura de tabla para la tabla `school_years`
 --
 
 CREATE TABLE `school_years` (
@@ -672,7 +671,7 @@ CREATE TABLE `school_years` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `school_years`
+-- Volcado de datos para la tabla `school_years`
 --
 
 INSERT INTO `school_years` (`id`, `start_date`, `ending_date`, `semester`) VALUES
@@ -684,7 +683,7 @@ INSERT INTO `school_years` (`id`, `start_date`, `ending_date`, `semester`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `school_year_workshop`
+-- Estructura de tabla para la tabla `school_year_workshop`
 --
 
 CREATE TABLE `school_year_workshop` (
@@ -694,7 +693,7 @@ CREATE TABLE `school_year_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `school_year_workshop`
+-- Volcado de datos para la tabla `school_year_workshop`
 --
 
 INSERT INTO `school_year_workshop` (`id`, `workshop_id`, `school_year_id`) VALUES
@@ -705,7 +704,7 @@ INSERT INTO `school_year_workshop` (`id`, `workshop_id`, `school_year_id`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `students`
+-- Estructura de tabla para la tabla `students`
 --
 
 CREATE TABLE `students` (
@@ -727,7 +726,7 @@ CREATE TABLE `students` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `students`
+-- Volcado de datos para la tabla `students`
 --
 
 INSERT INTO `students` (`id`, `last_name`, `first_name`, `birth_date`, `location_id`, `level_id`, `home`, `gender_id`, `school_id`, `document_type_id`, `number`, `phone`, `town_down_id`, `place_of_birth`, `responsable`) VALUES
@@ -737,7 +736,7 @@ INSERT INTO `students` (`id`, `last_name`, `first_name`, `birth_date`, `location
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_workshop`
+-- Estructura de tabla para la tabla `student_workshop`
 --
 
 CREATE TABLE `student_workshop` (
@@ -747,7 +746,7 @@ CREATE TABLE `student_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `student_workshop`
+-- Volcado de datos para la tabla `student_workshop`
 --
 
 INSERT INTO `student_workshop` (`student_id`, `school_year_id`, `workshop_id`) VALUES
@@ -761,7 +760,7 @@ INSERT INTO `student_workshop` (`student_id`, `school_year_id`, `workshop_id`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teachers`
+-- Estructura de tabla para la tabla `teachers`
 --
 
 CREATE TABLE `teachers` (
@@ -778,7 +777,7 @@ CREATE TABLE `teachers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `teachers`
+-- Volcado de datos para la tabla `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `last_name`, `first_name`, `birth_date`, `location_id`, `home`, `gender_id`, `document_type_id`, `number`, `phone`) VALUES
@@ -788,7 +787,7 @@ INSERT INTO `teachers` (`id`, `last_name`, `first_name`, `birth_date`, `location
 -- --------------------------------------------------------
 
 --
--- Table structure for table `teacher_responsable_workshop`
+-- Estructura de tabla para la tabla `teacher_responsable_workshop`
 --
 
 CREATE TABLE `teacher_responsable_workshop` (
@@ -798,7 +797,7 @@ CREATE TABLE `teacher_responsable_workshop` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `teacher_responsable_workshop`
+-- Volcado de datos para la tabla `teacher_responsable_workshop`
 --
 
 INSERT INTO `teacher_responsable_workshop` (`teacher_id`, `school_year_id`, `workshop_id`) VALUES
@@ -812,7 +811,7 @@ INSERT INTO `teacher_responsable_workshop` (`teacher_id`, `school_year_id`, `wor
 -- --------------------------------------------------------
 
 --
--- Table structure for table `town_down`
+-- Estructura de tabla para la tabla `town_down`
 --
 
 CREATE TABLE `town_down` (
@@ -821,7 +820,7 @@ CREATE TABLE `town_down` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `town_down`
+-- Volcado de datos para la tabla `town_down`
 --
 
 INSERT INTO `town_down` (`id`, `name`) VALUES
@@ -854,7 +853,7 @@ INSERT INTO `town_down` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Estructura de tabla para la tabla `users`
 --
 
 CREATE TABLE `users` (
@@ -866,40 +865,41 @@ CREATE TABLE `users` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `first_name` varchar(255) COLLATE utf8_bin NOT NULL,
-  `last_name` varchar(255) COLLATE utf8_bin NOT NULL
+  `last_name` varchar(255) COLLATE utf8_bin NOT NULL,
+  `is_social` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `users`
+-- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `active`, `updated_at`, `created_at`, `first_name`, `last_name`) VALUES
-(1, 'fede@mail.com', 'fede', '87e477fe76565d7d19101e66e71344aa813557ec', 1, '2019-10-24 15:05:48', '2019-10-21 00:00:00', 'Federico', 'Gasquez'),
-(2, 'agustin@mail.com', 'agustin', '5f0647500b3a8e716aa982c1c51b36c9168e0f8f', 1, '2019-10-30 11:37:23', '2019-10-21 00:00:00', 'agustin', 'agustin'),
-(3, 'jorge@mail.com', 'jorge', '546adbb44a0479b320635e0452ca06a4de041ccd', 0, '2019-10-24 15:05:53', '2019-10-21 00:00:00', 'jorge', 'agustin'),
-(4, 'matias@mail.com', 'matias', 'dbc6bbe3b711e3f58f25638428fdfc12e34c8c38', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'matias', 'agustin'),
-(5, 'lautaro@mail.com', 'lautaro', '75006e9292109a67f31f726a9f0390c42bf83478', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'lautaro', 'agustin'),
-(6, 'yesica@mail.com', 'yesica', 'd6f9d5f47ad277927a5896470307e6f68499a3b4', 0, '2019-10-24 14:52:00', '2019-10-21 00:00:00', 'yesica', 'agustin'),
-(7, 'ayelen@mail.com', 'ayelen', '70849a111ee2b68345c570e67f4a1f2e583206f3', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'ayelen', 'agustin'),
-(8, 'maria@mail.com', 'maria', 'e21fc56c1a272b630e0d1439079d0598cf8b8329', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'maria', 'agustin'),
-(9, 'federico@mail.com', 'federico', '4999915a961edfd7686112c2935288e1266eae14', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'federico', 'agustin'),
-(10, 'camila@mail.com', 'camila', 'c5c8066d458ef32d2d9d6c641cd90b1f5259ebed', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'camila', 'agustin'),
-(11, 'celesten@mail.com', 'celeste', '964a37eade1ceb3d67b0dbee7a1807f8f0715197', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'celeste', 'agustin'),
-(12, 'julieta@mail.com', 'julieta', '8c842b01aa3358b20822e0f8dd711f9a4fa4c80a', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'julieta', 'agustin'),
-(13, 'rocio@mail.com', 'rocio', 'ef86ee7ce0fdb135eb95199be0bc0d8e48a5e023', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'rocio', 'agustin'),
-(14, 'juan@mail.com', 'juan', 'a681645520394247d592ae4a15c9778328a2f121', 0, '2019-10-24 16:31:43', '2019-10-21 00:00:00', 'juan', 'agustin'),
-(15, 'nahuel@mail.com', 'nahuel', '538d2d442e1e867715aae58bda5fc207640a8f88', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'nahuel', 'agustin'),
-(16, 'milagros@mail.com', 'milagros', '3c5d9566525c9638fb34a90b33e0fed6f6d378af', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'milagros', 'agustin'),
-(17, 'roberto@mail.com', 'roberto', '9d500263e1a3252bc63faaca4e2bd9b72da439c3', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'roberto', 'agustin'),
-(18, 'carlos@mail.com', 'carlos', 'ab5e2bca84933118bbc9d48ffaccce3bac4eeb64', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'carlos', 'agustin'),
-(19, 'alicia@mail.com', 'alicia', '5ef025eb503bfce26fe6734d085174abf3b9a6a2', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'alicia', 'agustin'),
-(20, 'mariela@mail.com', 'mariela', '06300743b84744b6ddab09cce692b01e86c30094', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'mariela', 'agustin'),
-(22, 'agustin@mail.com', 'agustin', '5f0647500b3a8e716aa982c1c51b36c9168e0f8f', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'agustin', 'agustin');
+INSERT INTO `users` (`id`, `email`, `username`, `password`, `active`, `updated_at`, `created_at`, `first_name`, `last_name`, `is_social`) VALUES
+(1, 'fede@mail.com', 'fede', '87e477fe76565d7d19101e66e71344aa813557ec', 1, '2019-10-24 15:05:48', '2019-10-21 00:00:00', 'Federico', 'Gasquez', 0),
+(2, 'agustin@mail.com', 'agustin', '5f0647500b3a8e716aa982c1c51b36c9168e0f8f', 1, '2019-10-30 11:37:23', '2019-10-21 00:00:00', 'agustin', 'agustin', 0),
+(3, 'jorge@mail.com', 'jorge', '546adbb44a0479b320635e0452ca06a4de041ccd', 0, '2019-10-24 15:05:53', '2019-10-21 00:00:00', 'jorge', 'agustin', 0),
+(4, 'matias@mail.com', 'matias', 'dbc6bbe3b711e3f58f25638428fdfc12e34c8c38', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'matias', 'agustin', 0),
+(5, 'lautaro@mail.com', 'lautaro', '75006e9292109a67f31f726a9f0390c42bf83478', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'lautaro', 'agustin', 0),
+(6, 'federicogasquez@gmail.com', 'fede_2', 'd6f9d5f47ad277927a5896470307e6f68499a3b4', 1, '2019-10-24 14:52:00', '2019-10-21 00:00:00', 'fede', '2', 0),
+(7, 'ayelen@mail.com', 'ayelen', '70849a111ee2b68345c570e67f4a1f2e583206f3', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'ayelen', 'agustin', 0),
+(8, 'maria@mail.com', 'maria', 'e21fc56c1a272b630e0d1439079d0598cf8b8329', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'maria', 'agustin', 0),
+(9, 'federico@mail.com', 'federico', '4999915a961edfd7686112c2935288e1266eae14', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'federico', 'agustin', 0),
+(10, 'camila@mail.com', 'camila', 'c5c8066d458ef32d2d9d6c641cd90b1f5259ebed', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'camila', 'agustin', 0),
+(11, 'celesten@mail.com', 'celeste', '964a37eade1ceb3d67b0dbee7a1807f8f0715197', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'celeste', 'agustin', 0),
+(12, 'julieta@mail.com', 'julieta', '8c842b01aa3358b20822e0f8dd711f9a4fa4c80a', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'julieta', 'agustin', 0),
+(13, 'rocio@mail.com', 'rocio', 'ef86ee7ce0fdb135eb95199be0bc0d8e48a5e023', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'rocio', 'agustin', 0),
+(14, 'juan@mail.com', 'juan', 'a681645520394247d592ae4a15c9778328a2f121', 0, '2019-10-24 16:31:43', '2019-10-21 00:00:00', 'juan', 'agustin', 0),
+(15, 'nahuel@mail.com', 'nahuel', '538d2d442e1e867715aae58bda5fc207640a8f88', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'nahuel', 'agustin', 0),
+(16, 'milagros@mail.com', 'milagros', '3c5d9566525c9638fb34a90b33e0fed6f6d378af', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'milagros', 'agustin', 0),
+(17, 'roberto@mail.com', 'roberto', '9d500263e1a3252bc63faaca4e2bd9b72da439c3', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'roberto', 'agustin', 0),
+(18, 'carlos@mail.com', 'carlos', 'ab5e2bca84933118bbc9d48ffaccce3bac4eeb64', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'carlos', 'agustin', 0),
+(19, 'alicia@mail.com', 'alicia', '5ef025eb503bfce26fe6734d085174abf3b9a6a2', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'alicia', 'agustin', 0),
+(20, 'mariela@mail.com', 'mariela', '06300743b84744b6ddab09cce692b01e86c30094', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'mariela', 'agustin', 0),
+(22, 'agustin@mail.com', 'agustin', '5f0647500b3a8e716aa982c1c51b36c9168e0f8f', 1, '2019-10-21 00:00:00', '2019-10-21 00:00:00', 'agustin', 'agustin', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_has_role`
+-- Estructura de tabla para la tabla `user_has_role`
 --
 
 CREATE TABLE `user_has_role` (
@@ -909,7 +909,7 @@ CREATE TABLE `user_has_role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `user_has_role`
+-- Volcado de datos para la tabla `user_has_role`
 --
 
 INSERT INTO `user_has_role` (`id`, `user_id`, `role_id`) VALUES
@@ -921,7 +921,7 @@ INSERT INTO `user_has_role` (`id`, `user_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `workshops`
+-- Estructura de tabla para la tabla `workshops`
 --
 
 CREATE TABLE `workshops` (
@@ -931,7 +931,7 @@ CREATE TABLE `workshops` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `workshops`
+-- Volcado de datos para la tabla `workshops`
 --
 
 INSERT INTO `workshops` (`id`, `name`, `short_name`) VALUES
@@ -939,11 +939,11 @@ INSERT INTO `workshops` (`id`, `name`, `short_name`) VALUES
 (2, 'Dirección orquestal', 'Dirección');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `assistance_student_workshop`
+-- Indices de la tabla `assistance_student_workshop`
 --
 ALTER TABLE `assistance_student_workshop`
   ADD PRIMARY KEY (`id`),
@@ -952,80 +952,80 @@ ALTER TABLE `assistance_student_workshop`
   ADD KEY `FK_assistance_workshop_id` (`workshop_id`);
 
 --
--- Indexes for table `configuration`
+-- Indices de la tabla `configuration`
 --
 ALTER TABLE `configuration`
   ADD PRIMARY KEY (`field`);
 
 --
--- Indexes for table `cores`
+-- Indices de la tabla `cores`
 --
 ALTER TABLE `cores`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `days`
+-- Indices de la tabla `days`
 --
 ALTER TABLE `days`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `genders`
+-- Indices de la tabla `genders`
 --
 ALTER TABLE `genders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `instruments`
+-- Indices de la tabla `instruments`
 --
 ALTER TABLE `instruments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_instrument_type_id` (`type_id`);
 
 --
--- Indexes for table `instrument_types`
+-- Indices de la tabla `instrument_types`
 --
 ALTER TABLE `instrument_types`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `levels`
+-- Indices de la tabla `levels`
 --
 ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `map_points`
+-- Indices de la tabla `map_points`
 --
 ALTER TABLE `map_points`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `permissions`
+-- Indices de la tabla `permissions`
 --
 ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `preceptors`
+-- Indices de la tabla `preceptors`
 --
 ALTER TABLE `preceptors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `responsables`
+-- Indices de la tabla `responsables`
 --
 ALTER TABLE `responsables`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `roles`
+-- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role_has_permission`
+-- Indices de la tabla `role_has_permission`
 --
 ALTER TABLE `role_has_permission`
   ADD PRIMARY KEY (`id`),
@@ -1033,56 +1033,56 @@ ALTER TABLE `role_has_permission`
   ADD KEY `rol_id` (`role_id`);
 
 --
--- Indexes for table `schedules`
+-- Indices de la tabla `schedules`
 --
 ALTER TABLE `schedules`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `id` (`id`,`day_id`);
 
 --
--- Indexes for table `schools`
+-- Indices de la tabla `schools`
 --
 ALTER TABLE `schools`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `school_years`
+-- Indices de la tabla `school_years`
 --
 ALTER TABLE `school_years`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `school_year_workshop`
+-- Indices de la tabla `school_year_workshop`
 --
 ALTER TABLE `school_year_workshop`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `students`
+-- Indices de la tabla `students`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `teachers`
+-- Indices de la tabla `teachers`
 --
 ALTER TABLE `teachers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `town_down`
+-- Indices de la tabla `town_down`
 --
 ALTER TABLE `town_down`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `users`
+-- Indices de la tabla `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `user_has_role`
+-- Indices de la tabla `user_has_role`
 --
 ALTER TABLE `user_has_role`
   ADD PRIMARY KEY (`id`),
@@ -1090,143 +1090,143 @@ ALTER TABLE `user_has_role`
   ADD KEY `rol` (`role_id`);
 
 --
--- Indexes for table `workshops`
+-- Indices de la tabla `workshops`
 --
 ALTER TABLE `workshops`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `assistance_student_workshop`
+-- AUTO_INCREMENT de la tabla `assistance_student_workshop`
 --
 ALTER TABLE `assistance_student_workshop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `cores`
+-- AUTO_INCREMENT de la tabla `cores`
 --
 ALTER TABLE `cores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `days`
+-- AUTO_INCREMENT de la tabla `days`
 --
 ALTER TABLE `days`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `instruments`
+-- AUTO_INCREMENT de la tabla `instruments`
 --
 ALTER TABLE `instruments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `instrument_types`
+-- AUTO_INCREMENT de la tabla `instrument_types`
 --
 ALTER TABLE `instrument_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT for table `levels`
+-- AUTO_INCREMENT de la tabla `levels`
 --
 ALTER TABLE `levels`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `map_points`
+-- AUTO_INCREMENT de la tabla `map_points`
 --
 ALTER TABLE `map_points`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `permissions`
+-- AUTO_INCREMENT de la tabla `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT for table `preceptors`
+-- AUTO_INCREMENT de la tabla `preceptors`
 --
 ALTER TABLE `preceptors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `responsables`
+-- AUTO_INCREMENT de la tabla `responsables`
 --
 ALTER TABLE `responsables`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `role_has_permission`
+-- AUTO_INCREMENT de la tabla `role_has_permission`
 --
 ALTER TABLE `role_has_permission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
--- AUTO_INCREMENT for table `schedules`
+-- AUTO_INCREMENT de la tabla `schedules`
 --
 ALTER TABLE `schedules`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `schools`
+-- AUTO_INCREMENT de la tabla `schools`
 --
 ALTER TABLE `schools`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
--- AUTO_INCREMENT for table `school_years`
+-- AUTO_INCREMENT de la tabla `school_years`
 --
 ALTER TABLE `school_years`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `school_year_workshop`
+-- AUTO_INCREMENT de la tabla `school_year_workshop`
 --
 ALTER TABLE `school_year_workshop`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `students`
+-- AUTO_INCREMENT de la tabla `students`
 --
 ALTER TABLE `students`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `teachers`
+-- AUTO_INCREMENT de la tabla `teachers`
 --
 ALTER TABLE `teachers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `town_down`
+-- AUTO_INCREMENT de la tabla `town_down`
 --
 ALTER TABLE `town_down`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
--- AUTO_INCREMENT for table `user_has_role`
+-- AUTO_INCREMENT de la tabla `user_has_role`
 --
 ALTER TABLE `user_has_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `workshops`
+-- AUTO_INCREMENT de la tabla `workshops`
 --
 ALTER TABLE `workshops`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
