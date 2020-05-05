@@ -61,27 +61,18 @@ def create():
 
 def login(request, create_access_token):
     data = request.get_json()
-    username = data["username"]
-    password = data["password"]
     User.db = get_db()
-    user = User.find_by_username_and_pass(username, password)
-    status = True
-    msg = ""
+    user = User.find_by_username_and_pass(data["username"], data["password"])
 
     if not user:
-        msg = "Usuario o clave incorrecto."
-        status = False
-    if status and user["active"] == 0:
-        msg = "El usuario no se encuentra activo."
-        status = False
+        return jsonify({"msg":"Usuario o clave incorrecto."}), 422
 
-    if status:
-        msg = "La sesión se inició correctamente."
+    if user["active"] == 0:
+        return jsonify({"msg":"El usuario no se encuentra activo."}), 422
 
     return jsonify(
         {
-            "status": status,
-            msg: msg,
+            "msg": "La sesión se inició correctamente.",
             "token": create_access_token(identity=user["username"]),
         }
     )
