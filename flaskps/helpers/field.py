@@ -38,6 +38,16 @@ def max_length(js, field, name, length):
     else:
         return 0
 
+def not_google_username(js, field):
+    regex= "^g_"
+    if re.search(regex, field):
+        if js: return "El prefijo g_ no puede ser utilizado por usuarios"
+
+        flash("El prefijo g_ no puede ser utilizado por usuarios", "negative")
+        return 1
+    else:
+        return 0
+
 
 def email(js, field):
     regex = "^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"

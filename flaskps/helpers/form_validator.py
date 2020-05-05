@@ -18,6 +18,7 @@ def validate(rules, form=[], js=False):
         "max_length": lambda field: validation.max_length(
             js, form[field], rules[field]["name"], rules[field]["max_length"]
         ),
+        "not_google_username": lambda field: validation.not_google_username(js, form[field]),
         "email": lambda field: validation.email(js, form[field]),
         "unique_mail": lambda field: validation.unique_mail(js, form[field], username),
         "unique_user": lambda field: validation.unique_user(js, form[field]),
