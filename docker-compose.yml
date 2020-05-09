@@ -18,13 +18,16 @@ services:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: pass
     ports:
-      - 8080:80
+      - 8081:80
     links:
       - db
-  web: 
+  web:
     build: .
-    ports: 
+    ports:
       - 5000:5000
-    volumes: 
+    volumes:
       - ./:/app
+    environment:
+      GOOGLE_CLIENT_ID: 478339867097-ouuaam7pmidot05gl9krd3296obmj97f.apps.googleusercontent.com
+      GOOGLE_CLIENT_SECRET: oxBpSdrxdY8jf_xyLCeC8FMk
     network_mode: host

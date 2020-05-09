@@ -1,5 +1,5 @@
 from os import path
-from flask import Flask, render_template, g, session
+from flask import Flask, render_template, g, session, request
 from flaskps.db import get_db
 from flaskps.models.roles import Roles
 from flaskps.helpers import auth as helper_auth
@@ -28,15 +28,32 @@ from flaskps.helpers import (
     maintenance,
     workshop_helper,
 )
-
+from flask_cors import CORS
+from flask_jwt_extended import (
+    JWTManager,
+    jwt_required,
+    create_access_token,
+    get_jwt_identity,
+)
+from oauthlib.oauth2 import WebApplicationClient
+from flaskps.decorators.auth import login_required
 
 app = Flask(__name__)
-app.config.from_object(Config)
+app.secret_key = Config.GOOGLE_CLIENT_SECRET
+# OAuth 2 client setup
+client = WebApplicationClient(Config.GOOGLE_CLIENT_ID)
 
+# Setup the Flask-JWT-Extended extension
+app.config["JWT_SECRET_KEY"] = "sdlkjhghsgfinjpjaSOJIdSFOJSAdKJFA1"
+app.config['CORS_HEADERS'] = 'Content-Type'
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+app.config.from_object(Config)
+jwt = JWTManager(app)
+
+app.config.from_object(Config)
 app.register_error_handler(403, error.forbbiden)
 app.register_error_handler(404, error.page_not_found)
 app.register_error_handler(503, error.service_unavailable)
-
 
 bind_filters.bind_template_filters(app)
 
@@ -138,8 +155,6 @@ app.add_url_rule(
 
 # Usuarios
 app.add_url_rule("/usuarios", "user_index", user.index, methods=["GET"])
-app.add_url_rule("/usuarios", "user_create", user.create, methods=["POST"])
-app.add_url_rule("/registrarse", "user_new", user.new)
 app.add_url_rule(
     "/usuarios/<id>/activar", "user_<id>_activate", user.activate, methods=["POST"]
 )
@@ -251,3 +266,19 @@ def mapa_osm():
     return render_template(
         "mapa_osm.html", configs=configs, user_permissions=user_permissions
     )
+
+
+@app.route("/glogin")
+def glogin():
+    return auth.google_login(client)
+
+@app.route("/glogin/callback")
+def glogin_callback():
+    return auth.google_callback(client)
+
+# routes
+app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
+
+@app.route("/api/v1.0/auth", methods=["POST"])
+def login():
+    return auth.login(request, create_access_token)
