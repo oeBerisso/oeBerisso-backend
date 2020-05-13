@@ -1,6 +1,9 @@
 <template>
   <sui-container class='form-container'>
-     <sui-grid centered vertical-align="middle">
+    <sui-dimmer :active="saving">
+      <sui-loader size="medium">Cargando</sui-loader>
+    </sui-dimmer>
+    <sui-grid centered vertical-align="middle">
       <sui-grid-column>
         <h2 is="sui-header">
           <sui-header-content>Inicia sesión</sui-header-content>
@@ -47,6 +50,10 @@ import axios from '../../helper/axios';
 
 export default {
   name: 'login',
+  beforeCreate() {
+    const token = localStorage.getItem('token');
+    if (token) window.location = '/';
+  },
   methods: {
     handleSubmit: async function register() {
       this.saving = true;
@@ -54,6 +61,9 @@ export default {
         url: '/auth',
         method: 'post',
         data: this.user,
+      }).then((response) => {
+        localStorage.setItem('token', response.data.token);
+        setTimeout(() => window.location = '/', 3500);
       }).catch((e) => {
         if (e.response && e.response.status === 422) {
           this.$toast.error(e.response.data.msg, {
@@ -68,8 +78,8 @@ export default {
             position: 'top-left',
           });
         }
+        this.saving = false;
       });
-      this.saving = false;
     },
   },
   data() {

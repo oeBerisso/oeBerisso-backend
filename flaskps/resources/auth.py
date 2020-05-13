@@ -106,6 +106,7 @@ def login(request, create_access_token):
     if user["active"] == 0:
         return jsonify({"msg":"El usuario no se encuentra activo."}), 422
 
+    session["user"] = user["username"]
     return jsonify(
         {
             "msg": "La sesión se inició correctamente.",

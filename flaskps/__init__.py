@@ -77,9 +77,21 @@ app.jinja_env.globals.update(
 # Autenticación
 app.add_url_rule("/login", "auth_login", auth.login)
 app.add_url_rule("/logout", "auth_logout", auth.logout)
-app.add_url_rule(
-    "/autenticacion", "auth_authenticate", auth.authenticate, methods=["POST"]
-)
+app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
+
+@app.route("/glogin")
+def glogin():
+    return auth.google_login(client)
+
+@app.route("/glogin/callback")
+def glogin_callback():
+    return auth.google_callback(client)
+
+
+@app.route("/api/v1.0/auth", methods=["POST"])
+def login():
+    return auth.login(request, create_access_token)
+
 
 # Profesores
 app.add_url_rule(
@@ -268,17 +280,3 @@ def mapa_osm():
     )
 
 
-@app.route("/glogin")
-def glogin():
-    return auth.google_login(client)
-
-@app.route("/glogin/callback")
-def glogin_callback():
-    return auth.google_callback(client)
-
-# routes
-app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
-
-@app.route("/api/v1.0/auth", methods=["POST"])
-def login():
-    return auth.login(request, create_access_token)

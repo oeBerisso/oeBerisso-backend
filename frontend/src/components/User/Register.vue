@@ -1,7 +1,7 @@
 <template>
   <sui-container class='form-container'>
     <sui-dimmer :active="saving">
-      <sui-loader size="medium">cargando</sui-loader>
+      <sui-loader size="medium">Cargando</sui-loader>
     </sui-dimmer>
       <h1 style='text-align: center'>Regístrate</h1>
       <sui-segment raised>
@@ -105,6 +105,10 @@ export default {
     ErrorWrapper,
   },
   name: 'register',
+  beforeCreate() {
+    const token = localStorage.getItem('token');
+    if (token) window.location = '/';
+  },
   methods: {
     handleSubmit: async function register() {
       this.saving = true;
