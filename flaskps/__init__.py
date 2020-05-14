@@ -94,6 +94,8 @@ def login():
 
 @app.route("/v/<route>")
 def vue(route):
+    if(route == "logout"):
+        auth.logout
     return render_template("vue/index.html")
 
 # Profesores
