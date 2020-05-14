@@ -12,12 +12,12 @@
       <a
         is="sui-menu-item"
         content="Registrarse"
-        href='/registrarse'
+        href='/v/registrarse'
       />
       <a
         is="sui-menu-item"
         content="Iniciar sesion"
-        href='/iniciar-sesion'
+        href='/v/iniciar-sesion'
       />
 
     </sui-menu-menu>

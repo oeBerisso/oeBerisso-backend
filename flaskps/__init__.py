@@ -92,6 +92,9 @@ def glogin_callback():
 def login():
     return auth.login(request, create_access_token)
 
+@app.route("/v/<route>")
+def vue(route):
+    return render_template("vue/index.html")
 
 # Profesores
 app.add_url_rule(

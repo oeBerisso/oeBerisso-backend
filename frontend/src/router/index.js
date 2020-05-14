@@ -13,12 +13,12 @@ const routes = [
     component: Home,
   },
   {
-    path: '/registrarse',
+    path: '/v/registrarse',
     name: 'register',
     component: Register,
   },
   {
-    path: '/iniciar-sesion',
+    path: '/v/iniciar-sesion',
     name: 'login',
     component: Login,
   },
