@@ -75,10 +75,10 @@
           </sui-form-field>
         </sui-form-fields>
         <sui-form-field required :error="(errors.email || []).length > 0">
-          <label>Email</label>
+          <label>Correo electrónico</label>
           <ErrorWrapper :errors="errors.email">
             <sui-input
-              placeholder="Email"
+              placeholder="Correo electrónico"
               type="email"
               v-model="user.email"
               required

@@ -20,7 +20,7 @@ def index():
     SchoolYear.db = get_db()
     school_year = SchoolYear.search_date()
     Workshop.db = get_db()
-    workshops = Workshop.getFromSchoolYear(school_year["id"])
+    if school_year: workshops = Workshop.getFromSchoolYear(school_year["id"])
 
     return render_template("assistance/index.html", **locals())
 
