@@ -76,7 +76,6 @@ app.jinja_env.globals.update(
 
 # Autenticación
 app.add_url_rule("/login", "auth_login", auth.login)
-app.add_url_rule("/logout", "auth_logout", auth.logout)
 app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
 
 @app.route("/glogin")
@@ -94,6 +93,8 @@ def login():
 
 @app.route("/v/<route>")
 def vue(route):
+    if(route == "logout"):
+        auth.logout
     return render_template("vue/index.html")
 
 # Profesores
