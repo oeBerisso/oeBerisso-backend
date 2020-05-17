@@ -46,17 +46,18 @@ class User(object):
         return True
 
     @classmethod
-    def create_from_google(cls, email, username, first_name, last_name):
+    def create_from_google(cls, email, password, username, first_name, last_name):
         sql = """
-            INSERT INTO users (email, username, first_name, last_name, is_social)
-            VALUES (%s, %s, SHA1(%s), %s, %s)
+            INSERT INTO users (email, username, password, first_name, last_name, is_social)
+            VALUES (%s, %s, sha1(%s), %s, %s, %s)
         """
         cursor = cls.db.cursor()
         cursor.execute(
             sql,
             (
                 email,
-                'g_{username}',
+                username,
+                password,
                 first_name,
                 last_name,
                 1,
