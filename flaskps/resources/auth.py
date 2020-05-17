@@ -1,4 +1,4 @@
-from flask import jsonify, session, request, redirect, url_for, flash
+from flask import jsonify, session, request, redirect, url_for, flash, abort
 from flaskps.db import get_db
 from flaskps.models.user import User
 from flaskps.config import Config
@@ -6,6 +6,23 @@ from flaskps.helpers import form_validation as form_validator
 from flaskps.validations import register
 import json
 import requests
+
+def me(create_access_token):
+    if not session.get("user"):
+        return jsonify(
+            {
+                "msg": "No hay una sesión activa.",
+                "code": 300,
+            }
+        )
+        
+    return jsonify(
+        {
+            "msg": "Hay una sesión activa",
+            "token": create_access_token(identity=session["user"]),
+            "code": 200,
+        }
+    )
 
 def google_login(client):
     # Find out what URL to hit for Google login
