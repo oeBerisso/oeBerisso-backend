@@ -7,7 +7,7 @@ class User(object):
 
     @classmethod
     def all(cls):
-        sql = "SELECT * FROM users"
+        sql = "SELECT first_name, last_name, username, email, id, active FROM users"
         cursor = cls.db.cursor()
         cursor.execute(sql)
         return cursor.fetchall()

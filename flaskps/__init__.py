@@ -174,18 +174,18 @@ app.add_url_rule(
 )
 
 # Usuarios
-app.add_url_rule("/usuarios", "user_index", user.index, methods=["GET"])
+app.add_url_rule("/api/v1.0/usuarios", "user_index", user.index, methods=["GET"])
 app.add_url_rule(
-    "/usuarios/<id>/activar", "user_<id>_activate", user.activate, methods=["POST"]
+    "/api/v1.0/usuarios/<id>/activar", "user_<id>_activate", user.activate, methods=["POST"]
 )
 app.add_url_rule(
-    "/usuarios/<id>/desactivar",
+    "/api/v1.0/usuarios/<id>/desactivar",
     "user_<id>_desactivate",
     user.desactivate,
     methods=["POST"],
 )
 app.add_url_rule(
-    "/usuarios/<id>/modicar_roles",
+    "/api/v1.0/usuarios/<id>/modicar_roles",
     "user_<id>_roles",
     user.assign_roles,
     methods=["POST"],

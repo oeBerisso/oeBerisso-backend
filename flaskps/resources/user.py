@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, session, abort, flash
+from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flask_paginate import Pagination
 from flaskps.db import get_db
 from flaskps.models.user import User
@@ -9,7 +9,7 @@ from flaskps.helpers import auth as helper_auth
 from flaskps.helpers import permissions as helpers_permission
 from flaskps.helpers import form_validation
 from flaskps.validations import register, edit_profile, edit_password
-
+from flask_jwt_extended import create_access_token
 
 def show():
     user_permissions = helpers_permission.can_access()
@@ -50,7 +50,6 @@ def edit_pass():
 
 
 def index():
-
     user_permissions = helpers_permission.can_access(["users_index"])
 
     User.db = get_db()
@@ -76,19 +75,23 @@ def index():
     per_page = int(Configuration.get("elementsCount"))
     offset = per_page * (page - 1)
     pagination_users = users[offset : offset + per_page]
+    total = len(users)
     pagination = Pagination(page=page, per_page=per_page, total=len(users))
 
-    return render_template(
-        "user/index.html",
-        users=pagination_users,
-        pagination=pagination,
-        user_permissions=user_permissions,
-        configs=configs,
-        name=name,
-        email=email,
-        username=username,
-        active=active,
+    return jsonify(
+        {
+            "users": users,
+        }
     )
+    # return jsonify(
+    # {
+    #     "user/index.html",
+    #     users=pagination_users,
+    #     pagination=pagination,
+    #     user_permissions=user_permissions,
+    #     configs=configs,
+    #     }
+    # )
 
 
 def new():
@@ -127,7 +130,7 @@ def activate(id):
         User.db = get_db()
         User.change_active(1, id)
         flash("El usuario a sido activo correctamente.", "positive")
-        return redirect(url_for("user_index"))
+        return index()
 
 
 def desactivate(id):
@@ -135,7 +138,7 @@ def desactivate(id):
         User.db = get_db()
         User.change_active(0, id)
         flash("El usuario a sido desactivado correctamente.", "positive")
-        return redirect(url_for("user_index"))
+        return index()
 
 
 def assign_roles(id):
@@ -144,7 +147,7 @@ def assign_roles(id):
         User.delete_roles(id)
         User.modify_roles(id, request.form)
         flash("Los roles del usuario han sido modificados.", "positive")
-        return redirect(url_for("user_index"))
+        return index()
 
 
 def map_roles(user):
