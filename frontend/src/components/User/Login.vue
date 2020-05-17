@@ -8,8 +8,8 @@
         <h2 is="sui-header">
           <sui-header-content>Inicia sesión</sui-header-content>
         </h2>
-        <sui-form @submit.prevent="handleSubmit">
-          <sui-segment stacked>
+        <sui-segment stacked>
+          <sui-form @submit.prevent="handleSubmit">
             <sui-form-field>
               <label>Usuario</label>
               <sui-input
@@ -32,9 +32,16 @@
               />
             </sui-form-field>
             <sui-button size="large" primary fluid>Inicia sesión</sui-button>
-          </sui-segment>
-        </sui-form>
-
+          </sui-form>
+            <sui-divider section />
+            <sui-button
+              fluid
+              social="google"
+              content="Continuar con Google"
+              icon="google"
+              @click="googleLogin"
+            />
+        </sui-segment>
         <sui-message>
           ¿No poseés cuenta?
           <a href="/registrarse">Registrate aqui</a>
@@ -66,6 +73,9 @@ export default {
     }
   },
   methods: {
+    googleLogin: () => {
+      window.location = '/glogin';
+    },
     handleSubmit: async function register() {
       this.saving = true;
       await axios({

@@ -91,6 +91,16 @@
           Registrarse
         </sui-button>
       </sui-form>
+        <sui-divider horizontal>O con red social</sui-divider>
+        <sui-container text>
+          <sui-button
+            fluid
+            social="google"
+            content="Continuar con Google"
+            icon="google"
+            @click="gLogin"
+          />
+        </sui-container>
     </sui-segment>
   </sui-container>
 </template>
@@ -110,6 +120,9 @@ export default {
     if (token) window.location = '/';
   },
   methods: {
+    gLogin: () => {
+      window.location = '/glogin';
+    },
     handleSubmit: async function register() {
       this.saving = true;
       await axios({

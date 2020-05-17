@@ -6,6 +6,13 @@ from flaskps.helpers import form_validation as form_validator
 from flaskps.validations import register
 import json
 import requests
+import random
+import string
+
+
+def randomPassword(stringLength=11):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
 
 def me(create_access_token):
     if not session.get("user"):
@@ -67,6 +74,7 @@ def google_callback(client):
 
     # raise Exception(userinfo_response.json())
     response = userinfo_response.json()
+    # raise Exception(response.get("given_name"))
 
     user = User.find_by_email(response["email"])
     is_new = False
@@ -77,29 +85,32 @@ def google_callback(client):
         # given_name => first_name
         # family_name => last_name
         # email => email
-
-        username, dom = response["email"].split('@')
-        User.create_from_google(response["email"], username, response["given_name"], response["family_name"])
-        msg = "Se creo el usuario"
+        password = randomPassword()
         is_new = True
+        username, dom = response["email"].split('@')
+        User.create_from_google(response.get("email"), password, 'g_'+username, response.get("given_name"), response.get("family_name"))
+        msg = "Se creo el usuario"
 
     if not is_new and status and user["active"] == 0:
         msg = "El usuario no se encuentra activo."
         status = False
 
     if status:
-        session["user"] = username if is_new else user["username"]
+        session["user"] = "g_"+username if is_new else user["username"]
         if not is_new:
             msg = "La sesión se inició correctamente."
 
-    return jsonify(
-        {
-            "status": status,
-            "msg": msg,
-            "username": session["user"],
-            "email": response["email"],
-        }
-    )
+    flash(msg, "positive")
+    return redirect(url_for("home_page"))
+
+    # return jsonify(
+    #     {
+    #         "status": status,
+    #         "msg": msg,
+    #         "username": session["user"],
+    #         "email": response["email"],
+    #     }
+    # )
 
 
 def create():
