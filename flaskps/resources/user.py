@@ -75,12 +75,12 @@ def index():
     per_page = int(Configuration.get("elementsCount"))
     offset = per_page * (page - 1)
     pagination_users = users[offset : offset + per_page]
-    total = len(users)
     pagination = Pagination(page=page, per_page=per_page, total=len(users))
 
     return jsonify(
         {
-            "users": users,
+            "users": pagination_users,
+            "pages": (len(users) // per_page),
         }
     )
     # return jsonify(
