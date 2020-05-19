@@ -94,6 +94,13 @@
           </sui-table-row>
         </sui-table-body>
       </sui-table>
+      <paginate
+        :page-count="pages"
+        :click-handler="pageChanged"
+        :prev-text="'Anterior'"
+        :next-text="'Siguiente'"
+        :container-class="'pagination'">
+      </paginate>
     </sui-segment>
   </sui-container>
 </template>
@@ -122,10 +129,16 @@ export default {
       }
       return 'No';
     },
-    async fetchUsers(page) {
+    async fetchUsers() {
       this.saving = true;
+      let url;
+      if (this.useFilter) {
+        url = `/usuarios?name=${this.filter.name}&email=${this.filter.email}&active=${this.filter.active}&username=${this.filter.username}&page=${this.actualPage}`;
+      } else {
+        url = `/usuarios?page=${this.actualPage}`;
+      }
       await axios({
-        url: `/usuarios${page ? `?page=${page}` : ''}`,
+        url,
         method: 'get',
       }).then((response) => {
         this.users = response.data.users;
@@ -139,22 +152,10 @@ export default {
         this.saving = false;
       });
     },
-    async filterUsers(page) {
-      this.saving = true;
-      await axios({
-        url: `/usuarios?name=${this.filter.name}&email=${this.filter.email}&active=${this.filter.active}&username=${this.filter.username}${page ? `&page=${page}` : ''}`,
-        method: 'get',
-      }).then((response) => {
-        this.users = response.data.users;
-        this.pages = response.data.pages;
-      }).catch(() => {
-        this.$toast.error('Ocurrio un error en el servidor, intentá ms tarde', {
-          type: 'error',
-          duration: 3000,
-          position: 'top-left',
-        });
-        this.saving = false;
-      });
+    filterUsers() {
+      this.useFilter = true;
+      this.actualPage = 1;
+      this.fetchUsers();
     },
     openModal(user) {
       this.currentUser = user;
@@ -165,6 +166,8 @@ export default {
       this.activeModal = false;
     },
     clear() {
+      this.actualPage = 1;
+      this.useFilter = false;
       this.filter = {
         username: '',
         email: '',
@@ -177,24 +180,14 @@ export default {
       await axios({
         url: `/usuarios/${this.currentUser.id}/${this.currentUser.active ? 'desactivar' : 'activar'}`,
         method: 'post',
-      }).then((response) => {
-        this.users = response.data.users;
-        this.pages = response.data.pages;
-      }).catch(() => {
-        this.$toast.error('Ocurrio un error en el servidor, intentá ms tarde', {
-          type: 'error',
-          duration: 3000,
-          position: 'top-left',
-        });
       });
+      this.actualPage = 1;
+      this.fetchUsers();
       this.close();
     },
     pageChanged(page) {
-      if (this.filter.name || this.filter.email || this.filter.active || this.filter.username) {
-        this.filterUsers(page);
-      } else {
-        this.fetchUsers(page);
-      }
+      this.actualPage = page;
+      this.fetchUsers();
     },
   },
   data() {
@@ -204,6 +197,8 @@ export default {
       currentUser: {},
       saving: false,
       pages: '',
+      actualPage: 1,
+      useFilter: false,
       filter: {
         username: '',
         email: '',
@@ -226,9 +221,40 @@ export default {
 </script>
 
 <style>
-  .form-container {
-    margin-top: 1rem!important;
-    margin-bottom: 1rem!important;
-    text-align: center;
-  }
+.form-container {
+  margin-top: 1rem!important;
+  margin-bottom: 1rem!important;
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination li {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    list-style-type: none;
+    position: relative;
+    left: -30px;
+    border: 1px solid rgb(83, 120, 187);
+}
+
+.pagination li.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a{
+    color: black;
+    float: left;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+    padding: 0.75em;
+    margin: -0.75em;
+}
+
 </style>

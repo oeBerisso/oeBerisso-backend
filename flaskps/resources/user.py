@@ -68,30 +68,18 @@ def index():
         active = ""
         users = User.all()
     users = list(map(lambda user: map_roles(user), users))
-
     page = request.args.get("page", type=int, default=1)
-
-    configs = configs_for_user()
     per_page = int(Configuration.get("elementsCount"))
     offset = per_page * (page - 1)
     pagination_users = users[offset : offset + per_page]
-    pagination = Pagination(page=page, per_page=per_page, total=len(users))
+    pages = (len(users) // per_page) if (len(users) / per_page).is_integer() else (len(users) // per_page) + 1
 
-    return jsonify(
+   return jsonify(
         {
             "users": pagination_users,
-            "pages": (len(users) // per_page),
+            "pages": pages,
         }
     )
-    # return jsonify(
-    # {
-    #     "user/index.html",
-    #     users=pagination_users,
-    #     pagination=pagination,
-    #     user_permissions=user_permissions,
-    #     configs=configs,
-    #     }
-    # )
 
 
 def new():
@@ -130,7 +118,7 @@ def activate(id):
         User.db = get_db()
         User.change_active(1, id)
         flash("El usuario a sido activo correctamente.", "positive")
-        return index()
+        return jsonify({}), 200
 
 
 def desactivate(id):
@@ -138,7 +126,7 @@ def desactivate(id):
         User.db = get_db()
         User.change_active(0, id)
         flash("El usuario a sido desactivado correctamente.", "positive")
-        return index()
+        return jsonify({}), 200
 
 
 def assign_roles(id):
@@ -147,7 +135,7 @@ def assign_roles(id):
         User.delete_roles(id)
         User.modify_roles(id, request.form)
         flash("Los roles del usuario han sido modificados.", "positive")
-        return index()
+        return jsonify({}), 200
 
 
 def map_roles(user):
