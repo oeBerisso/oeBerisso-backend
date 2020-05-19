@@ -74,7 +74,7 @@ def index():
     pagination_users = users[offset : offset + per_page]
     pages = (len(users) // per_page) if (len(users) / per_page).is_integer() else (len(users) // per_page) + 1
 
-   return jsonify(
+    return jsonify(
         {
             "users": pagination_users,
             "pages": pages,
@@ -133,7 +133,7 @@ def assign_roles(id):
     if helpers_permission.can_access(["user_update"]):
         User.db = get_db()
         User.delete_roles(id)
-        User.modify_roles(id, request.form)
+        User.modify_roles(id, map_new_roles(request.json["permissions"]))
         flash("Los roles del usuario han sido modificados.", "positive")
         return jsonify({}), 200
 
@@ -164,3 +164,10 @@ def same_role(rol1, rol2):
 def configs_for_user():
     Configuration.db = get_db()
     return Configuration.all()
+
+def map_new_roles(permissions):
+    roles = []
+    if permissions["Administrador"]: roles.append(1)
+    if permissions["Profesor"]: roles.append(2)
+    if permissions["Preceptor"]: roles.append(3)
+    return roles

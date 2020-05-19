@@ -46,6 +46,13 @@
         @close="close"
         @changeStatus="changeStatus"
       />
+      <rolmodal
+        :name="selectedName"
+        :activeRol="rolesModal"
+        :permission="currentPermissions"
+        @closeRoles="closeRoles"
+        @modifyRoles="changeRoles"
+      />
       <sui-divider />
 
       <sui-table celled>
@@ -85,7 +92,7 @@
                 <sui-button
                   primary
                   icon="pencil"
-                  @click="openModal(user)"
+                  @click="openRoles(user)"
                 >
                   Modificar roles
                 </sui-button>
@@ -108,11 +115,13 @@
 <script>
 import axios from '../../helper/axios';
 import modal from './activate-modal.vue';
+import rolmodal from './roles-modal.vue';
 
 export default {
   name: 'index',
   components: {
     modal,
+    rolmodal,
   },
   created: async function fetch() {
     this.fetchUsers();
@@ -189,12 +198,43 @@ export default {
       this.actualPage = page;
       this.fetchUsers();
     },
+    openRoles(user) {
+      this.selectedName = user.first_name;
+      this.currentId = user.id;
+      user.roles.map((rol) => (
+        this.currentPermissions[rol.name] = rol.selected
+      ));
+      this.rolesModal = true;
+    },
+    closeRoles() {
+      this.selectedName = '';
+      this.currentId = '';
+      this.currentPermissions = {};
+      this.rolesModal = false;
+    },
+    async changeRoles({ permissions }) {
+      await axios({
+        url: `/usuarios/${this.currentId}/modicar_roles`,
+        method: 'post',
+        data: { permissions },
+      });
+      this.fetchUsers();
+      this.closeRoles();
+    },
   },
   data() {
     return {
       users: [],
+      currentId: '',
       activeModal: false,
+      rolesModal: false,
+      selectedName: '',
       currentUser: {},
+      currentPermissions: {
+        Profesor: false,
+        Administrador: false,
+        Preceptor: false,
+      },
       saving: false,
       pages: '',
       actualPage: 1,

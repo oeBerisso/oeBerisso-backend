@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'Modal',
+  name: 'activateModal',
   props: {
     active: {
       type: Boolean,
