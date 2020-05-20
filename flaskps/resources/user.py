@@ -162,6 +162,23 @@ def configs_for_user():
     Configuration.db = get_db()
     return Configuration.all()
 
+def get_permissions():
+    if not session.get("user"):
+        return jsonify({
+            "msg": "Error",
+            "code": 303,
+        })
+    Roles.db = get_db()
+    roles = Roles.getUserPermissions(session["user"])
+    return jsonify(
+        {
+            "msg": "Success",
+            "code": 200,
+            "roles": roles,
+            "name": session["user"],
+        }
+    )
+
 def map_new_roles(permissions):
     roles = []
     if permissions["Administrador"]: roles.append(1)
