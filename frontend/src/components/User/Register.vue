@@ -130,7 +130,7 @@ export default {
           type: 'success',
           duration: 5000,
           position: 'top-left',
-          onClose: (() => window.location = '/iniciar-sesion'),
+          onClose: (() => window.location = '/v/iniciar-sesion'),
         });
       }).catch((e) => {
         if (e.response && e.response.status === 422) {
