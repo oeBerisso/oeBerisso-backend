@@ -18,6 +18,7 @@ from flaskps.resources import (
     schedules,
     instrument,
     assistance,
+    configuration,
     map_point,
 )
 from flaskps.config import Config
@@ -274,6 +275,8 @@ app.add_url_rule("/admin/update", "admin_update", admin.update, methods=["GET", 
 # Home Page
 app.add_url_rule("/", "home_page", home.index)
 
+# config
+app.add_url_rule("/api/v1.0/config/footer", "footer_config", configuration.index)
 
 @app.route("/nucleos")
 def mapa_osm():
@@ -287,4 +290,6 @@ def mapa_osm():
         "mapa_osm.html", configs=configs, user_permissions=user_permissions
     )
 
-
+@app.route("/503")
+def forbbiden():
+    return render_template("error/503.html")
