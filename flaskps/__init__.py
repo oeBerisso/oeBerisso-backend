@@ -78,6 +78,11 @@ app.jinja_env.globals.update(
 app.add_url_rule("/login", "auth_login", auth.login)
 app.add_url_rule("/api/v1.0/register", "user_create", auth.create, methods=["POST"])
 
+# Permisos
+@app.route("/api/v1.0/permissions")
+def get_permissions():
+    return user.get_permissions()
+
 @app.route("/api/v1.0/me")
 def me():
     return auth.me(create_access_token)

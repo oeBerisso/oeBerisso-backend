@@ -77,7 +77,7 @@
                 </div>
             </div>
             {% endif %}
-            {% if user_permissions and has_permission(user_permissions, ['school_year_show','school_year_new','workshop_index']) %}
+            {% if user_permissions and has_permission(user_permissions, ['school_year_show','school_year_new','workshop_index', 'schedules_index', 'schedules_new']) %}
                 <div class="ui dropdown item">
                     <div>Cursos</div>
                     <i class="dropdown icon"></i>

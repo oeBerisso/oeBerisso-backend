@@ -1,4 +1,4 @@
-from flask import redirect, render_template, request, url_for, session, abort, flash
+from flask import redirect, render_template, request, url_for, session, abort, flash, jsonify
 from flask_paginate import Pagination
 from flaskps.db import get_db
 from flaskps.models.user import User
@@ -173,3 +173,20 @@ def same_role(rol1, rol2):
 def configs_for_user():
     Configuration.db = get_db()
     return Configuration.all()
+
+def get_permissions():
+    if not session.get("user"):
+        return jsonify({
+            "msg": "Error",
+            "code": 303,
+        })
+    Roles.db = get_db()
+    roles = Roles.getUserPermissions(session["user"])
+    return jsonify(
+        {
+            "msg": "Success",
+            "code": 200,
+            "roles": roles,
+            "name": session["user"],
+        }
+    )

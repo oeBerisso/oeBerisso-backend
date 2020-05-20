@@ -19,7 +19,7 @@ def me(create_access_token):
         return jsonify(
             {
                 "msg": "No hay una sesión activa.",
-                "code": 300,
+                "code": 303,
             }
         )
         
