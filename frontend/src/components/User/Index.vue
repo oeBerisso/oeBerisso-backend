@@ -189,6 +189,12 @@ export default {
       await axios({
         url: `/usuarios/${this.currentUser.id}/${this.currentUser.active ? 'desactivar' : 'activar'}`,
         method: 'post',
+      }).then(() => {
+        this.$toast.success(`El usuario usuario ${this.currentUser.first_name} fue ${this.currentUser.active ? 'desactivado' : 'activado'}`, {
+          type: 'success',
+          duration: 5000,
+          position: 'top-left',
+        });
       });
       this.actualPage = 1;
       this.fetchUsers();
@@ -217,6 +223,12 @@ export default {
         url: `/usuarios/${this.currentId}/modicar_roles`,
         method: 'post',
         data: { permissions },
+      }).then(() => {
+        this.$toast.success(`Se modificaron correctamente los permisos a ${this.selectedName}`, {
+          type: 'success',
+          duration: 5000,
+          position: 'top-left',
+        });
       });
       this.fetchUsers();
       this.closeRoles();

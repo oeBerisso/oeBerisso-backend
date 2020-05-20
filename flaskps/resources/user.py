@@ -117,7 +117,6 @@ def activate(id):
     if helpers_permission.can_access(["user_update"]):
         User.db = get_db()
         User.change_active(1, id)
-        flash("El usuario a sido activo correctamente.", "positive")
         return jsonify({}), 200
 
 
@@ -125,7 +124,6 @@ def desactivate(id):
     if helpers_permission.can_access(["user_update"]):
         User.db = get_db()
         User.change_active(0, id)
-        flash("El usuario a sido desactivado correctamente.", "positive")
         return jsonify({}), 200
 
 
@@ -134,7 +132,6 @@ def assign_roles(id):
         User.db = get_db()
         User.delete_roles(id)
         User.modify_roles(id, map_new_roles(request.json["permissions"]))
-        flash("Los roles del usuario han sido modificados.", "positive")
         return jsonify({}), 200
 
 
