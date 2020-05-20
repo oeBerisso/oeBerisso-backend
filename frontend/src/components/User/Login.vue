@@ -57,21 +57,6 @@ import axios from '../../helper/axios';
 
 export default {
   name: 'login',
-  beforeCreate() {
-    const token = localStorage.getItem('token');
-    if (token) window.location = '/';
-    if (!token) {
-      axios({
-        url: '/me',
-        method: 'get',
-      }).then((res) => {
-        if (res.data.token) {
-          localStorage.setItem('token', res.data.token);
-          window.location = '/';
-        }
-      });
-    }
-  },
   methods: {
     googleLogin: () => {
       window.location = '/glogin';

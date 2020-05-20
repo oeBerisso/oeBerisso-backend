@@ -115,10 +115,6 @@ export default {
     ErrorWrapper,
   },
   name: 'register',
-  beforeCreate() {
-    const token = localStorage.getItem('token');
-    if (token) window.location = '/';
-  },
   methods: {
     gLogin: () => {
       window.location = '/glogin';

@@ -22,7 +22,7 @@ def me(create_access_token):
                 "code": 303,
             }
         )
-        
+
     return jsonify(
         {
             "msg": "Hay una sesión activa",

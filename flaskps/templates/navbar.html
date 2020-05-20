@@ -9,7 +9,7 @@
         <a href="/nucleos" class="ui inverted button">Mapa de los nucleos</a>
 
         {% if is_authenticated(session) %}
-            
+
             {% if has_permission(user_permissions, ['config_index'])%}
             <div class="ui dropdown item">
                 <div>Administracion</div>
@@ -27,7 +27,7 @@
                 <i class="dropdown icon"></i>
                 <div class="menu">
                     {% if has_permission(user_permissions, ['users_index']) %}
-                        <a href="/usuarios" class="ui inverted button item">Listar usuarios</a>
+                        <a href="/v/usuarios" class="ui inverted button item">Listar usuarios</a>
                     {% endif %}
                 </div>
             </div>
@@ -106,8 +106,8 @@
             <div>{{is_authenticated(session)}}</div>
             <i class="dropdown icon"></i>
                 <div class="menu">
-                    <a href="/perfil" class="ui inverted button item">Ver perfil</a>           
-                    <a href="/v/logout" class="ui inverted button item">Cerrar sesion</a>           
+                    <a href="/perfil" class="ui inverted button item">Ver perfil</a>
+                    <a href="/v/logout" class="ui inverted button item">Cerrar sesion</a>
                 </div>
             </div>
         {% else %}

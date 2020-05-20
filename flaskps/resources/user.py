@@ -9,7 +9,7 @@ from flaskps.helpers import auth as helper_auth
 from flaskps.helpers import permissions as helpers_permission
 from flaskps.helpers import form_validation
 from flaskps.validations import register, edit_profile, edit_password
-
+from flask_jwt_extended import create_access_token
 
 def show():
     user_permissions = helpers_permission.can_access()
@@ -50,7 +50,6 @@ def edit_pass():
 
 
 def index():
-
     user_permissions = helpers_permission.can_access(["users_index"])
 
     User.db = get_db()
@@ -69,25 +68,17 @@ def index():
         active = ""
         users = User.all()
     users = list(map(lambda user: map_roles(user), users))
-
     page = request.args.get("page", type=int, default=1)
-
-    configs = configs_for_user()
     per_page = int(Configuration.get("elementsCount"))
     offset = per_page * (page - 1)
     pagination_users = users[offset : offset + per_page]
-    pagination = Pagination(page=page, per_page=per_page, total=len(users))
+    pages = (len(users) // per_page) if (len(users) / per_page).is_integer() else (len(users) // per_page) + 1
 
-    return render_template(
-        "user/index.html",
-        users=pagination_users,
-        pagination=pagination,
-        user_permissions=user_permissions,
-        configs=configs,
-        name=name,
-        email=email,
-        username=username,
-        active=active,
+    return jsonify(
+        {
+            "users": pagination_users,
+            "pages": pages,
+        }
     )
 
 
@@ -127,7 +118,7 @@ def activate(id):
         User.db = get_db()
         User.change_active(1, id)
         flash("El usuario a sido activo correctamente.", "positive")
-        return redirect(url_for("user_index"))
+        return jsonify({}), 200
 
 
 def desactivate(id):
@@ -135,16 +126,16 @@ def desactivate(id):
         User.db = get_db()
         User.change_active(0, id)
         flash("El usuario a sido desactivado correctamente.", "positive")
-        return redirect(url_for("user_index"))
+        return jsonify({}), 200
 
 
 def assign_roles(id):
     if helpers_permission.can_access(["user_update"]):
         User.db = get_db()
         User.delete_roles(id)
-        User.modify_roles(id, request.form)
+        User.modify_roles(id, map_new_roles(request.json["permissions"]))
         flash("Los roles del usuario han sido modificados.", "positive")
-        return redirect(url_for("user_index"))
+        return jsonify({}), 200
 
 
 def map_roles(user):
@@ -190,3 +181,10 @@ def get_permissions():
             "name": session["user"],
         }
     )
+
+def map_new_roles(permissions):
+    roles = []
+    if permissions["Administrador"]: roles.append(1)
+    if permissions["Profesor"]: roles.append(2)
+    if permissions["Preceptor"]: roles.append(3)
+    return roles

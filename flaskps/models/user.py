@@ -7,7 +7,7 @@ class User(object):
 
     @classmethod
     def all(cls):
-        sql = "SELECT * FROM users"
+        sql = "SELECT first_name, last_name, username, email, id, active FROM users"
         cursor = cls.db.cursor()
         cursor.execute(sql)
         return cursor.fetchall()
@@ -93,7 +93,7 @@ class User(object):
     @classmethod
     def filter(cls, username, name, email, active):
         sql = """
-            SELECT * FROM users AS u
+            SELECT first_name, last_name, username, email, id, active FROM users AS u
             WHERE u.email LIKE %s AND u.username LIKE %s AND (u.first_name LIKE %s OR u.last_name LIKE %s) AND u.active LIKE %s
         """
         cursor = cls.db.cursor()
@@ -192,7 +192,7 @@ class User(object):
         """
         cursor = cls.db.cursor()
         for rol in roles:
-            cursor.execute(sql, (id, rol[0]))
+            cursor.execute(sql, (id, rol))
             cls.db.commit()
 
     @classmethod
